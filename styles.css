@@ -41,3 +41,25 @@
     outline: black 1px solid;
     min-height: 14vh;
 }
+
+.modal-container {
+    display: none;
+}
+
+.calendar {
+    z-index: 1;
+    position: relative;
+}
+
+.display-none {
+    display: none;
+}
+
+.modal-display-on {
+    z-index: 2;
+    position: relative;
+    bottom: 26vh;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.349);
+    color: white;
+}

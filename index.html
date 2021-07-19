@@ -6,16 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calendar</title>
-    <link rel="stylesheet" href="/js-calendar/styles.css" />
-    <script src="/js-calendar/variables.js" defer></script>
-    <script src="/js-calendar/functions.js" defer></script>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="variables.js" defer></script>
+    <script src="functions.js" defer></script>
+    <script src="main.js" defer></script>
 </head>
 
 <body>
-    <div id="calendar">
+    <div id="calendar" class="calendar">
         <div class="title">
             <h1>Calendar</h1>
-            <button>Add Event</button>
+            <button id="addActivity">Add Event</button>
         </div>
         <div class="container">
             <div class="today-is" id="todayIs">Monday, July 20, 2015</div>
@@ -28,42 +29,47 @@
                 <div>Saturday</div>
                 <div>Sunday</div>
             </div>
-            <div class="display-grid" id="days">
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
-                <div class="day-style">5</div>
+            <div class="display-grid" id="days"></div>
+        </div>
+    </div>
+    <div id="modal-container" class="display-none">
+        <div id="modal" class="modal">
+            <div id="form" class="form">
+                <h2>New event</h2>
+                <form action="">
+                    <label for="title">Description:</label>
+                    <input type="text" id="title" maxlength="60" /><br />
+                    <label for="initial-date">Initial Date:</label>
+                    <input type="text" id="initial-date" /><br />
+                    <label for="end-date">End Date:</label>
+                    <input type="checkbox" id="end-date" for="final-date" /><br />
+                    <label for="final-date">Final Date:</label>
+                    <input type="text" id="final-date" /><br />
+                    <label for="remind-me">Remind me when this event expires:</label>
+                    <input type="checkbox" id="remind-me" for="exp-time" /><br />
+                    <label for="exp-time">Remind me at:</label>
+                    <select id="exp-time">
+              <br />
+              <option value="0">select time</option>
+              <option value="1">1 hour</option>
+              <option value="2">2 hours</option>
+              <option value="3">3 hours</option></select
+            ><br />
+            <label for="description">Description:</label>
+            <input type="text" id="description" /><br />
+            <label for="event-type">Event type:</label>
+            <select id="event-type">
+              <option value="0">select type</option>
+              <option value="1">Meeting</option>
+              <option value="2">Lunch</option>
+              <option value="3">Birthday</option>
+            </select>
+                    <br />
+                    <div>
+                        <input type="button" value="Save" class="save" id="save" />
+                        <button id="cancel">Cancel</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
