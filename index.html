@@ -38,13 +38,13 @@
                 <h2>New event</h2>
                 <form action="">
                     <label for="title">Description:</label>
-                    <input type="text" id="title" maxlength="60" /><br />
+                    <input type="text" id="title" required maxlength="60" /><br />
                     <label for="initial-date">Initial Date:</label>
-                    <input type="text" id="initial-date" /><br />
+                    <input type="date" id="initial-date" required /><br />
                     <label for="end-date">End Date:</label>
                     <input type="checkbox" id="end-date" for="final-date" /><br />
                     <label for="final-date">Final Date:</label>
-                    <input type="text" id="final-date" /><br />
+                    <input type="date" id="final-date" required /><br />
                     <label for="remind-me">Remind me when this event expires:</label>
                     <input type="checkbox" id="remind-me" for="exp-time" /><br />
                     <label for="exp-time">Remind me at:</label>
@@ -56,7 +56,7 @@
               <option value="3">3 hours</option></select
             ><br />
             <label for="description">Description:</label>
-            <input type="text" id="description" /><br />
+            <input type="text" id="description" minlength="30" required /><br />
             <label for="event-type">Event type:</label>
             <select id="event-type">
               <option value="0">select type</option>

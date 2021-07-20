@@ -25,24 +25,24 @@ const calendar = document.getElementById("days");
 
 let $date = new Date();
 let dia = $date.getDate();
-let mes = $date.getMonth();
+let mes = $date.getMonth() + 1;
 let anno = $date.getUTCFullYear();
 
 let firstWeekDay = new Date(mes + " 01, " + anno + " 00:00:00");
 let firstMonthDay = firstWeekDay.getDay();
-let lastDayMonth = new Date(anno, mes - 1, 0);
+let lastDayMonth = new Date(anno, mes, 0);
 let daysPerMonth = lastDayMonth.getDate();
 
+console.log(firstMonthDay);
 console.log(daysPerMonth);
+console.log(mes);
 
-for (let i = 0; i <= firstMonthDay + daysPerMonth; i++) {
+for (let i = 1; i < firstMonthDay + daysPerMonth; i++) {
     let day = document.createElement("div");
     if (i >= firstMonthDay) {
         day.innerHTML = 1 + i - firstMonthDay;
     }
     calendar.appendChild(day);
-    console.log(firstMonthDay);
-    console.log(daysPerMonth);
 }
 
 var btnNewAct = document
@@ -55,9 +55,17 @@ var btnCancel = document
 
 function newTask() {
     var modal = document.getElementById("modal-container");
+    // var inputs = document.querySelectorAll("input");
+    // for (let i = 0; i < inputs.length; i++) {
+    //     inputs[i].setAttribute("required");
+    // }
     modal.classList.replace("display-none", "modal-display-on");
 }
 
 function cancelTask() {
+    var inputs = document.querySelectorAll("input");
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].removeAttribute("required");
+    }
     modal.classList.replace("modal-display-on", "display-none");
 }
