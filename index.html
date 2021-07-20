@@ -35,8 +35,12 @@
     <div id="modal-container" class="display-none">
         <div id="modal" class="modal">
             <div id="form" class="form">
-                <h2>New event</h2>
-                <form action="">
+                <div class="hflex">
+                    <h2>New event</h2>
+                    <button class="close" id="close">X</button>
+                </div>
+                <hr>
+                <form>
                     <label for="title">Description:</label>
                     <input type="text" id="title" required maxlength="60" /><br />
                     <label for="initial-date">Initial Date:</label>
@@ -72,6 +76,8 @@
                 </form>
             </div>
         </div>
+        <div class="display-grid" id="days"></div>
+    </div>
     </div>
 </body>
 
