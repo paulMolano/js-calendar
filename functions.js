@@ -25,7 +25,8 @@ function drawCalendar(firstDay, monthLength) {
   for (let i = 1; i <= n; i++) {
     var square = document.createElement("div");
     if (i >= firstDay && i < firstDay + monthLength) {
-      var str = mm + "-" + (1 + i - firstDay);
+      var str = 1 + i - firstDay;
+      str < 10 ? (str = "0" + str) : str;
       square.setAttribute("id", str);
       square.innerHTML = 1 + i - firstDay;
     }
@@ -43,6 +44,12 @@ function cancelTask() {
     inputs[i].removeAttribute("required");
   }
   modal.classList.replace("modal-display-on", "display-none");
+  document.getElementById("title").value = "";
+  document.getElementById("initial-date").value = "";
+  document.getElementById("final-date").value = "";
+  document.getElementById("exp-time").value = "";
+  document.getElementById("description").value = "";
+  document.getElementById("event-type").value = "";
 }
 
 function saveTask() {
@@ -67,11 +74,19 @@ function saveTask() {
     monthObject.push(task);
     storage.setItem(month[1], JSON.stringify(monthObject));
   }
-  console.log(storage.getItem(month[1]));
+  drawTask();
+  cancelTask();
 }
 
 function drawTask() {
-  for (let x = 0; x < array.length; x++) {
-    const element = array[x];
+  let monthToDraw = storage.getItem(mm);
+  monthToDraw = JSON.parse(monthToDraw);
+  if (monthToDraw != null);
+  for (let x = 0; x < monthToDraw.length; x++) {
+    let initialDay = monthToDraw[x].initialDate;
+    let theinitialDay = initialDay.split("-");
+    theinitialDay = theinitialDay[2];
+    toWrite = document.getElementById(theinitialDay);
+    toWrite.style.backgroundColor = "red";
   }
 }

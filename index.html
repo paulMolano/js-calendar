@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calendar</title>
     <link rel="stylesheet" href="styles.css" />
-    <script src="variables.js" defer></script>
-    <script src="functions.js" defer></script>
-    <script src="main.js" defer></script>
 </head>
+<script src="variables.js" defer></script>
+<script src="functions.js" defer></script>
+<script src="main.js" defer></script>
 
 <body>
     <div id="calendar" class="calendar">
@@ -60,10 +60,12 @@
 
                     <label class="form-content check-remind" for="exp-time">Remind me at:</label>
                     <select class="form-content check-remind" id="exp-time">
-                                <option value="0">select time</option>
-                                <option value="1">1 hour</option>
-                                <option value="2">2 hours</option>
-                                <option value="3">3 hours</option>
+                                <option value= 0>select time</option>
+                                <option value= 5>5 minutes</option>
+                                <option value= 10>10 minutes</option>
+                                <option value= 15>15 minutes</option>
+                                <option value= 30>30 minutes</option>
+                                <option value= 60>1 hour</option>
                             </select>
 
                     <label class="form-content" for="description">Description:</label>
@@ -71,11 +73,11 @@
 
                     <label class="form-content" for="event-type">Event type:</label>
                     <select class="form-content" id="event-type">
-                    
+ 
               <option value="0">select type</option>
-              <option value="1">Meeting</option>
-              <option value="2">Lunch</option>
-              <option value="3">Birthday</option>
+              <option value="meeting">Meeting</option>
+              <option value="lunch">Lunch</option>
+              <option value="birthday">Birthday</option>
             </select>
 
             </div>
