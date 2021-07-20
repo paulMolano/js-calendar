@@ -36,47 +36,58 @@
         <div id="modal" class="modal">
             <div id="form" class="form">
                 <div class="hflex">
-                    <h2>New event</h2>
+                    <h2>NEW EVENT</h2>
                     <button class="close" id="close">X</button>
                 </div>
                 <hr>
-                <form>
-                    <label for="title">Description:</label>
-                    <input type="text" id="title" required maxlength="60" /><br />
-                    <label for="initial-date">Initial Date:</label>
-                    <input type="date" id="initial-date" required /><br />
-                    <label for="end-date">End Date:</label>
-                    <input type="checkbox" id="end-date" for="final-date" /><br />
-                    <label for="final-date">Final Date:</label>
-                    <input type="date" id="final-date" required /><br />
-                    <label for="remind-me">Remind me when this event expires:</label>
-                    <input type="checkbox" id="remind-me" for="exp-time" /><br />
-                    <label for="exp-time">Remind me at:</label>
-                    <select id="exp-time">
-              <br />
-              <option value="0">select time</option>
-              <option value="1">1 hour</option>
-              <option value="2">2 hours</option>
-              <option value="3">3 hours</option></select
-            ><br />
-            <label for="description">Description:</label>
-            <input type="text" id="description" minlength="30" required /><br />
-            <label for="event-type">Event type:</label>
-            <select id="event-type">
+                <form class="display-flex-column">
+
+                    <label class="form-content" for="title">Title:</label>
+                    <input class="form-content" type="text" id="title" required maxlength="60" />
+
+                    <label class="form-content" for="initial-date">Initial Date:</label>
+                    <input class="form-content" type="date" id="initial-date" required />
+
+
+                    <label class="form-content" for="end-date">End Date:</label>
+                    <input class="form-content" type="checkbox" id="end-date" for="final-date" />
+
+                    <label class="form-content check-final" for="final-date">Final Date:</label>
+                    <input class="form-content check-final" type="date" id="final-date" required />
+
+                    <label class="form-content" for="remind-me">Remind me when this event expires:</label>
+                    <input class="form-content" type="checkbox" id="remind-me" for="exp-time" />
+
+                    <label class="form-content check-remind" for="exp-time">Remind me at:</label>
+                    <select class="form-content check-remind" id="exp-time">
+                                <option value="0">select time</option>
+                                <option value="1">1 hour</option>
+                                <option value="2">2 hours</option>
+                                <option value="3">3 hours</option>
+                            </select>
+
+                    <label class="form-content" for="description">Description:</label>
+                    <input class="form-content" type="text" id="description" minlength="30" required />
+
+                    <label class="form-content" for="event-type">Event type:</label>
+                    <select class="form-content" id="event-type">
+                    
               <option value="0">select type</option>
               <option value="1">Meeting</option>
               <option value="2">Lunch</option>
               <option value="3">Birthday</option>
             </select>
-                    <br />
-                    <div>
-                        <input type="button" value="Save" class="save" id="save" />
-                        <button id="cancel">Cancel</button>
-                    </div>
-                </form>
+
             </div>
+
+            <div class="btns">
+                <input class="modal-btn" type="button" value="Save" class="save" id="save" />
+                <button class="modal-btn" id="cancel">Cancel</button>
+            </div>
+            </form>
         </div>
-        <div class="display-grid" id="days"></div>
+    </div>
+    <div class="display-grid" id="days"></div>
     </div>
     </div>
 </body>

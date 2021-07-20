@@ -48,6 +48,9 @@ body {
     min-height: 14vh;
 }
 
+
+/*? MODAL */
+
 .modal-container {
     display: none;
 }
@@ -75,6 +78,7 @@ body {
 
 .modal {
     background-color: #fff;
+    padding: 1.5vh;
 }
 
 .hflex {
@@ -83,18 +87,30 @@ body {
     justify-content: space-between;
 }
 
-#final-date {
-    visibility: hidden;
+.form-content {
+    padding: 0.5vh;
 }
 
-#end-date:checked~#final-date {
-    visibility: visible;
+.display-flex-column {
+    display: flex;
+    flex-direction: column;
 }
 
-#exp-time {
-    visibility: hidden;
+
+/* !CHECKBOX */
+
+.check-final {
+    display: none;
 }
 
-#remind-me:checked~#exp-time {
-    visibility: visible;
+#end-date:checked~.check-final {
+    display: block;
+}
+
+.check-remind {
+    display: none;
+}
+
+#remind-me:checked~.check-remind {
+    display: block;
 }
