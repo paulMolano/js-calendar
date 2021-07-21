@@ -12,3 +12,8 @@ var monthLength = new Date(yyyy, mm, 0).getDate();
 /* SELECTOR VARIABLES */
 var modal = document.getElementById("modal-container");
 var inputs = document.querySelectorAll("input");
+var modal2 = document.getElementById("modal-container2");
+
+/*TODAY*/
+let today = document.getElementById("todayIs");
+today.innerHTML = dd + " / " + mm + " / " + yyyy;

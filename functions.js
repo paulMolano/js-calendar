@@ -14,6 +14,19 @@ var closeBtn = document
 var saveBtn = document
   .getElementById("save")
   .addEventListener("click", saveTask);
+
+document.addEventListener("keyup", (e) => {
+  if (e.key == "Escape") {
+    cancelTask();
+  }
+});
+
+document.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    cancelTask();
+  }
+});
+
 //?----------------------------------------------------- FUNCTIONS ---------------------------------------------------\\
 function drawCalendar(firstDay, monthLength) {
   let monthDays = document.getElementById("days");
