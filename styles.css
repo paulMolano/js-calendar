@@ -178,6 +178,7 @@ body {
 .info-task {
   z-index: 1;
   background-color: white;
+  position: absolute;
 }
 
 /* !CHECKBOX */

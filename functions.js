@@ -127,21 +127,20 @@ function drawTask() {
             let drawEvent = document.createElement("div");
             drawEvent.innerHTML = tasksObject[i].title;
             drawEvent.setAttribute("class", "event-style");
-            let imgSpan = document.createElement("span");
-            let imgEdit = document.createElement("img");
-            let imgTrash = document.createElement("img");
-            imgEdit.setAttribute("src", "/js-calendar/assets/edit.svg");
-            imgEdit.setAttribute("class", "edit-style");
-            imgTrash.setAttribute("src", "/js-calendar/assets/trash.svg");
-            imgTrash.setAttribute("class", "trash-style");
             drawEvent.setAttribute("id", tasksObject[i].id);
             drawEvent.setAttribute("class", "tasks-object");
             toWrite.appendChild(drawEvent);
-            drawEvent.appendChild(imgSpan);
-            imgSpan.appendChild(imgEdit);
-            drawEvent.appendChild(imgTrash);
+            let drawEventInfo = document.createElement("div");
+            drawEventInfo.innerHTML = "";
+            drawEventInfo.setAttribute("id", "info-" + tasksObject[i].id);
+            drawEventInfo.setAttribute("class", "tasks-modal");
+            toWrite.appendChild(drawEventInfo);
+
             // drawEvent.addEventListener("click", readTask);
             drawEvent.addEventListener("mouseover", infoTask);
+            drawEvent.addEventListener("mouseout", function () {
+              document.getElementById("infoDiv").remove();
+            });
             //   () => {
             //   let trash = document.querySelector(".trash-style");
             //   let pen = document.querySelector(".edit-style");
@@ -154,19 +153,11 @@ function drawTask() {
             //   trash.classList.replace("display-block", "trash-style");
             //   pen.classList.replace("display-block", "edit-style");
             // });
-            editDelIcons();
           }
         }
       }
     }
   }
-}
-
-function editDelIcons() {
-  let trash = document.querySelector(".trash-style");
-  let edit = document.querySelector(".edit-style");
-  trash.addEventListener("click", deleteTask);
-  edit.addEventListener("click", editTask);
 }
 
 function readTask(e) {
@@ -252,7 +243,7 @@ function infoTask(e) {
         <p id="infoEventType">Event type: ${eventType} <span id="remind">Reminder: ${expTime}</span></p>
         <p id="infoDescription">${description}</p>
     </div></template>`;
-      let toInsertInfo = document.getElementById(selectTask);
+      let toInsertInfo = document.getElementById("info-" + selectTask);
       toInsertInfo.insertAdjacentHTML("beforeend", infoTask);
       let contentTemplate = document.getElementById("infoTask").content;
       let copyContent = document.importNode(contentTemplate, true);
