@@ -195,15 +195,15 @@ body {
 }
 
 .edit-style {
-    display: none;
+    visibility: hidden;
 }
 
 .trash-style {
-    display: none;
+    visibility: hidden;
 }
 
 .display-block {
     height: 2.5vh;
     width: 2.5vw;
-    display: block;
+    visibility: visible;
 }

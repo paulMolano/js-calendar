@@ -27,21 +27,6 @@ document.addEventListener("click", (e) => {
     }
 });
 
-let trash = document.querySelector(".trash-style");
-let edit = document.querySelector(".edit-style");
-
-trash.addEventListener("click", (e) => {
-    if (e.target === edit) {
-        editTask();
-    }
-});
-
-edit.addEventListener("click", (e) => {
-    if (e.target === trash) {
-        deleteTask();
-    }
-});
-
 let editDelTasks = document.querySelectorAll(".event-style");
 
 //?----------------------------------------------------- FUNCTIONS ---------------------------------------------------\\
@@ -155,7 +140,7 @@ function drawTask() {
                         drawEvent.appendChild(imgSpan);
                         imgSpan.appendChild(imgEdit);
                         drawEvent.appendChild(imgTrash);
-                        drawEvent.addEventListener("click", readTask);
+                        // drawEvent.addEventListener("click", readTask);
                         drawEvent.addEventListener("mouseover", () => {
                             let trash = document.querySelector(".trash-style");
                             let pen = document.querySelector(".edit-style");
@@ -168,11 +153,19 @@ function drawTask() {
                             trash.classList.replace("display-block", "trash-style");
                             pen.classList.replace("display-block", "edit-style");
                         });
+                        editDelIcons();
                     }
                 }
             }
         }
     }
+}
+
+function editDelIcons() {
+    let trash = document.querySelector(".trash-style");
+    let edit = document.querySelector(".edit-style");
+    trash.addEventListener("click", deleteTask);
+    edit.addEventListener("click", editTask);
 }
 
 function readTask(e) {
@@ -215,6 +208,7 @@ function deleteTask(e) {
 }
 
 function editTask(e) {
+    alert("jolin");
     //* ORCO poner edit
     let selectTask = e.target.id;
     let tasksObject = storage.getItem("taskStorage");
