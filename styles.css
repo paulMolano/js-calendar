@@ -176,9 +176,15 @@ body {
 
 /* SECOND MODAL*/
 .info-task {
-  z-index: 1;
   background-color: white;
   position: absolute;
+  width: 14vw;
+}
+
+.tasks-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* !CHECKBOX */

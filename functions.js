@@ -135,24 +135,10 @@ function drawTask() {
             drawEventInfo.setAttribute("id", "info-" + tasksObject[i].id);
             drawEventInfo.setAttribute("class", "tasks-modal");
             toWrite.appendChild(drawEventInfo);
-
-            // drawEvent.addEventListener("click", readTask);
             drawEvent.addEventListener("mouseover", infoTask);
             drawEvent.addEventListener("mouseout", function () {
               document.getElementById("infoDiv").remove();
             });
-            //   () => {
-            //   let trash = document.querySelector(".trash-style");
-            //   let pen = document.querySelector(".edit-style");
-            //   trash.classList.replace("trash-style", "display-block");
-            //   pen.classList.replace("edit-style", "display-block");
-            // });
-            // drawEvent.addEventListener("mouseout", () => {
-            //   let trash = document.querySelector(".trash-style");
-            //   let pen = document.querySelector(".edit-style");
-            //   trash.classList.replace("display-block", "trash-style");
-            //   pen.classList.replace("display-block", "edit-style");
-            // });
           }
         }
       }
