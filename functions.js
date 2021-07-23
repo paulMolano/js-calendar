@@ -27,15 +27,26 @@ document.addEventListener("click", (e) => {
   }
 });
 
+document.getElementById("forward").addEventListener("click", nextMonth);
+document.getElementById("backward").addEventListener("click", previousMonth);
+document.getElementById("forwYear").addEventListener("click", nextYear);
+document.getElementById("backYear").addEventListener("click", previousYear);
+
 let editDelTasks = document.querySelectorAll(".event-style");
 
 //?----------------------------------------------------- FUNCTIONS ---------------------------------------------------\\
 function drawCalendar(firstDay, monthLength) {
   let monthDays = document.getElementById("days");
-
-  firstDay == 6 && monthLength == 31 ? (n = 42) : (n = 35);
-  firstDay == 7 && monthLength >= 30 ? (n = 42) : (n = 35);
-  firstDay == 1 && monthLength == 28 ? (n = 28) : (n = 35); //! corregir container border
+  if (
+    (firstDay == 6 && monthLength == 31) ||
+    (firstDay == 7 && monthLength >= 30)
+  ) {
+    n = 42;
+  } else if (firstDay == 1 && monthLength == 28) {
+    n = 28;
+  } else {
+    n = 35;
+  }
 
   for (let i = 1; i <= n; i++) {
     var square = document.createElement("div");
@@ -44,6 +55,9 @@ function drawCalendar(firstDay, monthLength) {
       str < 10 ? (str = "0" + str) : str;
       square.setAttribute("id", str);
       square.innerHTML = 1 + i - firstDay;
+      square.addEventListener("click", newTaskpreDay); // se la ponemos al boton
+      //square.addEventListener("mouseover", createButton);
+      //square.addEventListener("mouseout", deleteButton);
     }
     square.setAttribute("class", "day-style");
     monthDays.appendChild(square);
@@ -52,6 +66,15 @@ function drawCalendar(firstDay, monthLength) {
 
 function newTask() {
   modal.classList.replace("display-none", "modal-display-on");
+}
+
+function newTaskpreDay(e) {
+  newTask();
+  let daytotask = e.target.id;
+  //si tenemos un boton, hacer el id del parentNode
+  let initialDate = document.getElementById("initial-date");
+  mm = String(mm).padStart(2, "0");
+  initialDate.value = `${yyyy}-${mm}-${daytotask}`;
 }
 
 function cancelTask() {
@@ -110,7 +133,8 @@ function saveTask() {
 
 function drawTask() {
   //! se podria eliminar el idsList???
-  let idsList = storage.getItem(mm + "-" + yyyy);
+  let string = String(mm).padStart(2, "0");
+  let idsList = storage.getItem(string + "-" + yyyy);
   idsList = JSON.parse(idsList);
   let tasksObject = storage.getItem("taskStorage");
   tasksObject = JSON.parse(tasksObject);
@@ -237,4 +261,62 @@ function infoTask(e) {
       toInsertInfo.appendChild(copyContent);
     }
   }
+}
+
+function nextMonth() {
+  document.getElementById("days").innerHTML = "";
+  mm = parseInt(mm) + 1;
+  if (mm > 12) {
+    mm = 1;
+    yyyy = parseInt(yyyy) + 1;
+  }
+
+  var firstDay = new Date(mm + " 01, " + yyyy + " 00:00:00").getDay();
+  firstDay == 0 ? (firstDay = 7) : firstDay;
+  var monthLength = new Date(yyyy, mm, 0).getDate();
+  drawCalendar(firstDay, monthLength);
+  drawTask();
+  let today = document.getElementById("todayIs");
+  today.innerHTML = dd + " / " + mm + " / " + yyyy;
+}
+
+function nextYear() {
+  document.getElementById("days").innerHTML = "";
+  yyyy = parseInt(yyyy) + 1;
+  var firstDay = new Date(mm + " 01, " + yyyy + " 00:00:00").getDay();
+  firstDay == 0 ? (firstDay = 7) : firstDay;
+  var monthLength = new Date(yyyy, mm, 0).getDate();
+  drawCalendar(firstDay, monthLength);
+  drawTask();
+  let today = document.getElementById("todayIs");
+  today.innerHTML = dd + " / " + mm + " / " + yyyy;
+}
+
+function previousMonth() {
+  document.getElementById("days").innerHTML = "";
+  mm = parseInt(mm) - 1;
+  if (mm < 1) {
+    mm = 12;
+    yyyy = parseInt(yyyy) - 1;
+  }
+
+  var firstDay = new Date(mm + " 01, " + yyyy + " 00:00:00").getDay();
+  firstDay == 0 ? (firstDay = 7) : firstDay;
+  var monthLength = new Date(yyyy, mm, 0).getDate();
+  let today = document.getElementById("todayIs");
+  today.innerHTML = dd + " / " + mm + " / " + yyyy;
+  drawCalendar(firstDay, monthLength);
+  drawTask();
+}
+
+function previousYear() {
+  document.getElementById("days").innerHTML = "";
+  yyyy = parseInt(yyyy) - 1;
+  var firstDay = new Date(mm + " 01, " + yyyy + " 00:00:00").getDay();
+  firstDay == 0 ? (firstDay = 7) : firstDay;
+  var monthLength = new Date(yyyy, mm, 0).getDate();
+  drawCalendar(firstDay, monthLength);
+  drawTask();
+  let today = document.getElementById("todayIs");
+  today.innerHTML = dd + " / " + mm + " / " + yyyy;
 }

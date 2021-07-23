@@ -110,9 +110,9 @@ body {
   border: solid 1px rgba(110, 104, 104, 0.514);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 1vw 1vh;
-  grid-template-areas: ". . . . . . ." ". . . . . . ." ". . . . . . ." ". . . . . . ." ". . . . . . .";
+  grid-template-areas: ". . . . . . ." ". . . . . . ." ". . . . . . ." ". . . . . . ." ". . . . . . ." ". . . . . . .";
   text-align: center;
 }
 
@@ -184,19 +184,6 @@ body {
 .display-flex-column {
   display: flex;
   flex-direction: column;
-}
-
-/* SECOND MODAL*/
-.info-task {
-  background-color: white;
-  position: absolute;
-  width: 14vw;
-}
-
-.tasks-modal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 /* !CHECKBOX */
