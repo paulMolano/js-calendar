@@ -43,8 +43,28 @@ body {
   font-size: 2.3vh;
   text-transform: uppercase;
 }
+.add-button {
+  position: absolute;
+  text-align: center;
+  right: 0%;
+  top: 0%;
+  height: 2.5vh;
+  width: 2.5vh;
+  border-radius: 50%;
+  color: white;
+  background-color: tomato;
+  font-size: 1.5vh;
+  border: none;
+}
 
-#addActivity {
+.add-button:hover {
+  color: tomato;
+  background-color: white;
+  border: solid 1px black;
+  z-index: 3;
+}
+
+.addActivity {
   position: absolute;
   top: 83vh;
   right: 64vh;
@@ -57,18 +77,10 @@ body {
   border: none;
 }
 
-#addActivity:hover {
-  position: absolute;
-  top: 83vh;
-  right: 64vh;
-  height: 7vh;
-  width: 7vh;
-  border-radius: 50%;
+.addActivity:hover {
   color: tomato;
   background-color: white;
   border: solid 1px black;
-  font-size: 5.5vh;
-  border: none;
   z-index: 3;
 }
 
@@ -217,4 +229,10 @@ body {
   height: 2.5vh;
   width: 2.5vw;
   visibility: visible;
+}
+
+.looking {
+  transform: scale(1.1);
+  border-color: tomato;
+  box-shadow: 0 0 1rem tomato;
 }
