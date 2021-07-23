@@ -56,8 +56,8 @@ function drawCalendar(firstDay, monthLength) {
       square.setAttribute("id", str);
       square.innerHTML = 1 + i - firstDay;
       square.addEventListener("click", newTaskpreDay); // se la ponemos al boton
-      //square.addEventListener("mouseover", createButton);
-      //square.addEventListener("mouseout", deleteButton);
+      square.addEventListener("mouseover", hoveringIn);
+      square.addEventListener("mouseout", hoveringOut);
     }
     square.setAttribute("class", "day-style");
     monthDays.appendChild(square);
@@ -319,4 +319,21 @@ function previousYear() {
   drawTask();
   let today = document.getElementById("todayIs");
   today.innerHTML = dd + " / " + mm + " / " + yyyy;
+}
+
+function hoveringIn(event) {
+  var btn = event.target;
+  var button = document.createElement("button");
+  button.classList.add("add-button");
+  button.setAttribute("id", "button-" + btn.id);
+  button.innerHTML = "+";
+  btn.appendChild(button);
+
+  btn.classList.toggle("looking");
+}
+
+function hoveringOut(e) {
+  let btn = e.target;
+  btn.classList.toggle("looking");
+  document.getElementById("button-" + btn.id).remove();
 }
