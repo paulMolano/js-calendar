@@ -13,7 +13,7 @@ var closeBtn = document
 
 var saveBtn = document
   .getElementById("save")
-  .addEventListener("click", saveTask);
+  .addEventListener("click", validationForm);
 
 document.addEventListener("keyup", (e) => {
   if (e.key == "Escape") {
@@ -95,7 +95,14 @@ function todayIs() {
     document.getElementById(currentDay).style.border = "solid red 2px";
   }
 }
-
+function validationForm() {
+  let inputs = document.querySelectorAll(".required");
+  let count = 0;
+  for (const input of inputs) {
+    input.value != "" ? count++ : false; //personalizar alert
+  }
+  count == 3 ? saveTask() : alert("You must fill all the fields ");
+}
 function newTask() {
   modal.classList.replace("display-none", "modal-display-on");
 }
@@ -112,6 +119,7 @@ function newTaskpreDay(e) {
 }
 
 function cancelTask() {
+  document.getElementById("myForm").reset();
   modal.classList.replace("modal-display-on", "display-none");
 }
 

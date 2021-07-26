@@ -50,24 +50,24 @@
                     <button class="close" id="close">X</button>
                 </div>
                 <hr>
-                <form id="myForm" class="display-flex-column">
+                <form id="myForm" class="display-flex-column" method="POST">
                     <input id="taskId" name="taskId" type="hidden" value="none">
 
                     <label class="form-content" for="title">Title:</label>
-                    <input class="form-content" type="text" id="title"  maxlength="60" required >
+                    <input class="form-content required" type="text" id="title"  maxlength="60" required >
 
                     <label class="form-content" for="initial-date">Initial Date:</label>
-                    <input class="form-content" type="date" id="initial-date" required >
+                    <input class="form-content required" type="date" id="initial-date" required >
 
 
                     <label class="form-content" for="end-date">End Date:</label>
                     <input class="form-content" type="checkbox" id="end-date" for="final-date" >
 
                     <label class="form-content check-final" for="final-date">Final Date:</label>
-                    <input class="form-content check-final" type="date" id="final-date" required >
+                    <input class="form-content check-final" type="date" id="final-date" >
 
                     <label class="form-content check-final" for="final-date">Final Hour:</label>
-                    <input class="form-content check-final" type="time" id="final-time" required />
+                    <input class="form-content check-final " type="time" id="final-time" />
 
                     <label class="form-content" for="remind-me">Remind me when this event expires:</label>
                     <input class="form-content" type="checkbox" id="remind-me" for="exp-time" >
@@ -83,7 +83,7 @@
                             </select>
 
                     <label class="form-content" for="description">Description:</label>
-                    <input class="form-content" type="text" id="description" minlength="30" required >
+                    <input class="form-content required" type="text" id="description" minlength="30" required >
 
                     <label class="form-content" for="event-type">Event type:</label>
                     <select class="form-content" id="event-type">
