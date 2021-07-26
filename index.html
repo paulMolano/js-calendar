@@ -50,26 +50,27 @@
                     <button class="close" id="close">X</button>
                 </div>
                 <hr>
-                <form class="display-flex-column">
+                <form id="myForm" class="display-flex-column">
+                    <input id="taskId" name="taskId" type="hidden" value="none">
 
                     <label class="form-content" for="title">Title:</label>
-                    <input class="form-content" type="text" id="title" required maxlength="60" />
+                    <input class="form-content" type="text" id="title"  maxlength="60" required >
 
                     <label class="form-content" for="initial-date">Initial Date:</label>
-                    <input class="form-content" type="date" id="initial-date" required />
+                    <input class="form-content" type="date" id="initial-date" required >
 
 
                     <label class="form-content" for="end-date">End Date:</label>
-                    <input class="form-content" type="checkbox" id="end-date" for="final-date" />
+                    <input class="form-content" type="checkbox" id="end-date" for="final-date" >
 
                     <label class="form-content check-final" for="final-date">Final Date:</label>
-                    <input class="form-content check-final" type="date" id="final-date" required />
+                    <input class="form-content check-final" type="date" id="final-date" required >
 
                     <label class="form-content check-final" for="final-date">Final Hour:</label>
                     <input class="form-content check-final" type="time" id="final-time" required />
 
                     <label class="form-content" for="remind-me">Remind me when this event expires:</label>
-                    <input class="form-content" type="checkbox" id="remind-me" for="exp-time" />
+                    <input class="form-content" type="checkbox" id="remind-me" for="exp-time" >
 
                     <label class="form-content check-remind" for="exp-time">Remind me at:</label>
                     <select class="form-content check-remind" id="exp-time">
@@ -82,7 +83,7 @@
                             </select>
 
                     <label class="form-content" for="description">Description:</label>
-                    <input class="form-content" type="text" id="description" minlength="30" required />
+                    <input class="form-content" type="text" id="description" minlength="30" required >
 
                     <label class="form-content" for="event-type">Event type:</label>
                     <select class="form-content" id="event-type">
@@ -97,7 +98,7 @@
 
             <div class="btns">
                 <input class="modal-btn" type="button" value="Save" class="save" id="save" />
-                <button class="modal-btn" id="cancel">Cancel</button>
+                <input class="modal-btn" type="reset" value="Cancel" id="cancel"/>
             </div>
             </form>
         </div>

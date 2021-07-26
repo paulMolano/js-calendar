@@ -89,7 +89,10 @@ function todayIs() {
   var currentMonth = String(day.getMonth() + 1).padStart(2, "0");
   var currentYear = day.getFullYear();
   if (currentMonth == mm && currentYear == yyyy) {
-    document.getElementById(currentDay).classList.add("today");
+    document.getElementById(currentDay).style.color = "red";
+    document.getElementById(currentDay).style.backgroundColor =
+      " rgb(255, 252, 71)";
+    document.getElementById(currentDay).style.border = "solid red 2px";
   }
 }
 
@@ -109,16 +112,7 @@ function newTaskpreDay(e) {
 }
 
 function cancelTask() {
-  for (let i = 0; i < inputs.length; i++) {
-    inputs[i].removeAttribute("required");
-  }
   modal.classList.replace("modal-display-on", "display-none");
-  document.getElementById("title").value = "";
-  document.getElementById("initial-date").value = "";
-  document.getElementById("final-date").value = "";
-  document.getElementById("exp-time").value = "";
-  document.getElementById("description").value = "";
-  document.getElementById("event-type").value = "";
 }
 
 function saveTask() {
@@ -265,7 +259,6 @@ function deleteTask(e) {
 }
 
 function editTask(e) {
-  //* ORCO poner edit
   let selectTask = e.target.dataset.id;
   let tasksObject = storage.getItem("taskStorage");
   tasksObject = JSON.parse(tasksObject);
@@ -273,6 +266,7 @@ function editTask(e) {
   for (let i = 0; i < tasksObject.length; i++) {
     if (selectTask == tasksObject[i].id) {
       modal.classList.replace("display-none", "modal-display-on");
+      document.getElementById("taskId").value = tasksObject[i].id;
       document.getElementById("title").value = tasksObject[i].title;
       document.getElementById("initial-date").value =
         tasksObject[i].initialDate;
@@ -280,9 +274,16 @@ function editTask(e) {
       document.getElementById("exp-time").value = tasksObject[i].expTime;
       document.getElementById("description").value = tasksObject[i].description;
       document.getElementById("event-type").value = tasksObject[i].type;
+      document
+        .getElementById("save")
+        .setAttribute("data-id", tasksObject[i].id);
     }
   }
-  deleteTask(e);
+
+  document.getElementById("save").addEventListener("click", function save(e) {
+    deleteTask(e);
+  });
+  document.getElementById("save").removeEventListener("click", save);
 }
 
 function infoTask(e) {
@@ -295,13 +296,14 @@ function infoTask(e) {
       let title = tasksObject[i].title;
       let initialDate = tasksObject[i].initialDate;
       let finalDate = tasksObject[i].finalDate;
+      let finalHour = tasksObject[i].finalHour;
       let expTime = tasksObject[i].expTime;
       let description = tasksObject[i].description;
       let eventType = tasksObject[i].type;
 
       let infoTask = `<template id=infoTask><div class=" info-task" id="infoDiv">
         <h2 id="infoTitle">${title}</h2>
-        <p id="infoInitialDate">From ${initialDate} <span id="infoFinalDate">to ${finalDate}</span></p>
+        <p id="infoInitialDate">From ${initialDate} <span id="infoFinalDate">to ${finalDate} at ${finalHour} </span></p>
         <p id="infoEventType">Event type: ${eventType} <span id="remind">Reminder: ${expTime}</span></p>
         <p id="infoDescription">${description}</p>
     </div></template>`;
