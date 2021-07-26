@@ -61,6 +61,7 @@ function addReminder() {
     for (const id of idsList) {
       for (let i = 0; i < tasksObject.length; i++) {
         if (id == tasksObject[i].id) {
+          let title = tasksObject[i].title;
           let initialDate = tasksObject[i].initialDate;
           let initialDay = initialDate.split("-");
           if (dd === initialDay[2]) {
@@ -82,11 +83,10 @@ function addReminder() {
             let reminderHours = fHours - currentHours;
             reminderMinutes -= currentMinutes;
             let timeReminder = (reminderHours * 60 + reminderMinutes) * 60000;
+            console.log(timeReminder, initialDate, dd);
             if (timeReminder != NaN && timeReminder > 0) {
               setTimeout(function () {
-                alert(
-                  `Aviso,quedan ${expMinutes} minutos para ${tasksObject[i].title}`
-                );
+                showPopup(expMinutes, title);
               }, timeReminder);
               console.log(timeReminder, initialDate, dd);
             }
@@ -97,9 +97,21 @@ function addReminder() {
   }
 }
 
+function showPopup(expMinutes, title) {
+  document.getElementById(
+    "popup-text"
+  ).innerHTML = `Aviso,quedan ${expMinutes} minutos para ${title}`;
+  document.getElementById("popup").style.display = "block";
+  var audio = new Audio("alarm.ogg");
+  audio.play();
+  document.getElementById("time-up").addEventListener("click", function () {
+    document.getElementById("popup").style.display = "none";
+  });
+}
+
 function drawCalendar(firstDay, monthLength) {
   let monthDays = document.getElementById("days");
-
+  monthDays.innerHTML = "";
   if (
     (firstDay == 6 && monthLength == 31) ||
     (firstDay == 7 && monthLength >= 30)
@@ -128,8 +140,6 @@ function drawCalendar(firstDay, monthLength) {
   todayIs();
 
   document.getElementById("calendar").style.opacity = 1;
-
-  console.log(document.getElementById("calendar").style.opacity);
 }
 
 function todayIs() {
@@ -144,6 +154,7 @@ function todayIs() {
     document.getElementById(currentDay).style.border = "solid red 2px";
   }
 }
+
 function validationForm() {
   let inputs = document.querySelectorAll(".required");
   let count = 0;
@@ -160,7 +171,6 @@ function newTaskpreDay(e) {
   if (e.target.classList == "day-style looking") {
     newTask();
     let daytotask = e.target.id;
-    //si tenemos un boton, hacer el id del parentNode
     let initialDate = document.getElementById("initial-date");
     mm = String(mm).padStart(2, "0");
     initialDate.value = `${yyyy}-${mm}-${daytotask}`;
@@ -480,30 +490,6 @@ function hoveringIn(event) {
     btn.appendChild(button);
   }
 }
-
-/*  var button = document.createElement("button");
-  button.classList.add("add-button");
-  button.setAttribute("id", "button-" + btn.id);
-  var deleteButton = document.createElement("button");
-  deleteButton.classList.add("delete-button");
-  deleteButton.setAttribute("id", "delete-" + btn.id);
-  deleteButton.innerHTML = "-";
-
-  if (btn.matches(".tasks-object" || ".delete-button")) {
-    button.innerHTML = "EDIT";
-
-    if (!btn.innerHTML.includes("delete-button") && !btn.class != "day-style") {
-      btn.appendChild(deleteButton);
-      document
-        .querySelector(".delete-button")
-        .addEventListener("click", deleteTask);
-    }
-  } else {
-    button.innerHTML = "+";
-  }
-  btn.appendChild(button);
-  btn.classList.toggle("looking"); 
-}*/
 
 function hoveringOut(e) {
   let btn = e.target;
