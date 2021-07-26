@@ -35,8 +35,22 @@ document.getElementById("backYear").addEventListener("click", previousYear);
 let editDelTasks = document.querySelectorAll(".event-style");
 
 //?----------------------------------------------------- FUNCTIONS ---------------------------------------------------\\
+function addReminder() {
+  let string = String(mm).padStart(2, "0");
+  let idsList = storage.getItem(string + "-" + yyyy);
+  idsList = JSON.parse(idsList);
+  let tasksObject = storage.getItem("taskStorage");
+  tasksObject = JSON.parse(tasksObject);
+  if (idsList) {
+    for (const id of idsList) {
+      for (let i = 0; i < tasksObject.length; i++) {}
+    }
+  }
+}
+
 function drawCalendar(firstDay, monthLength) {
   let monthDays = document.getElementById("days");
+
   if (
     (firstDay == 6 && monthLength == 31) ||
     (firstDay == 7 && monthLength >= 30)
@@ -61,6 +75,21 @@ function drawCalendar(firstDay, monthLength) {
     }
     square.setAttribute("class", "day-style");
     monthDays.appendChild(square);
+  }
+  todayIs();
+
+  document.getElementById("calendar").style.opacity = 1;
+
+  console.log(document.getElementById("calendar").style.opacity);
+}
+
+function todayIs() {
+  const day = new Date();
+  var currentDay = String(day.getDate());
+  var currentMonth = String(day.getMonth() + 1).padStart(2, "0");
+  var currentYear = day.getFullYear();
+  if (currentMonth == mm && currentYear == yyyy) {
+    document.getElementById(currentDay).classList.add("today");
   }
 }
 
@@ -117,6 +146,7 @@ function saveTask() {
     title: document.getElementById("title").value,
     initialDate: document.getElementById("initial-date").value,
     finalDate: document.getElementById("final-date").value,
+    finalHour: document.getElementById("final-time").value,
     expTime: document.getElementById("exp-time").value,
     description: document.getElementById("description").value,
     type: document.getElementById("event-type").value,
@@ -286,61 +316,73 @@ function infoTask(e) {
 }
 
 function nextMonth() {
-  document.getElementById("days").innerHTML = "";
-  mm = parseInt(mm) + 1;
-  if (mm > 12) {
-    mm = 1;
-    yyyy = parseInt(yyyy) + 1;
-  }
+  document.getElementById("calendar").style.opacity = 0;
+  setTimeout(function () {
+    let daysElement = document.getElementById("days");
+    daysElement.innerHTML = "";
+    mm = parseInt(mm) + 1;
+    calendar.innerHTML = monthNames[mm - 1] + " " + yyyy;
+    if (mm > 12) {
+      mm = 1;
+      yyyy = parseInt(yyyy) + 1;
+    }
 
-  var firstDay = new Date(mm + " 01, " + yyyy + " 00:00:00").getDay();
-  firstDay == 0 ? (firstDay = 7) : firstDay;
-  var monthLength = new Date(yyyy, mm, 0).getDate();
-  drawCalendar(firstDay, monthLength);
-  drawTask();
-  let today = document.getElementById("todayIs");
-  today.innerHTML = dd + " / " + mm + " / " + yyyy;
+    var firstDay = new Date(mm + " 01, " + yyyy + " 00:00:00").getDay();
+    firstDay == 0 ? (firstDay = 7) : firstDay;
+    var monthLength = new Date(yyyy, mm, 0).getDate();
+
+    console.log(document.getElementById("calendar").style.opacity);
+
+    drawCalendar(firstDay, monthLength);
+    drawTask();
+  }, 1000);
 }
 
 function nextYear() {
-  document.getElementById("days").innerHTML = "";
-  yyyy = parseInt(yyyy) + 1;
-  var firstDay = new Date(mm + " 01, " + yyyy + " 00:00:00").getDay();
-  firstDay == 0 ? (firstDay = 7) : firstDay;
-  var monthLength = new Date(yyyy, mm, 0).getDate();
-  drawCalendar(firstDay, monthLength);
-  drawTask();
-  let today = document.getElementById("todayIs");
-  today.innerHTML = dd + " / " + mm + " / " + yyyy;
+  document.getElementById("calendar").style.opacity = 0;
+  setTimeout(function () {
+    document.getElementById("days").innerHTML = "";
+    yyyy = parseInt(yyyy) + 1;
+    calendar.innerHTML = monthNames[mm - 1] + " " + yyyy;
+    var firstDay = new Date(mm + " 01, " + yyyy + " 00:00:00").getDay();
+    firstDay == 0 ? (firstDay = 7) : firstDay;
+    var monthLength = new Date(yyyy, mm, 0).getDate();
+    drawCalendar(firstDay, monthLength);
+    drawTask();
+  }, 1000);
 }
 
 function previousMonth() {
-  document.getElementById("days").innerHTML = "";
-  mm = parseInt(mm) - 1;
-  if (mm < 1) {
-    mm = 12;
-    yyyy = parseInt(yyyy) - 1;
-  }
+  document.getElementById("calendar").style.opacity = 0;
+  setTimeout(function () {
+    document.getElementById("days").innerHTML = "";
+    mm = parseInt(mm) - 1;
+    calendar.innerHTML = monthNames[mm - 1] + " " + yyyy;
+    if (mm < 1) {
+      mm = 12;
+      yyyy = parseInt(yyyy) - 1;
+    }
 
-  var firstDay = new Date(mm + " 01, " + yyyy + " 00:00:00").getDay();
-  firstDay == 0 ? (firstDay = 7) : firstDay;
-  var monthLength = new Date(yyyy, mm, 0).getDate();
-  let today = document.getElementById("todayIs");
-  today.innerHTML = dd + " / " + mm + " / " + yyyy;
-  drawCalendar(firstDay, monthLength);
-  drawTask();
+    var firstDay = new Date(mm + " 01, " + yyyy + " 00:00:00").getDay();
+    firstDay == 0 ? (firstDay = 7) : firstDay;
+    var monthLength = new Date(yyyy, mm, 0).getDate();
+    drawCalendar(firstDay, monthLength);
+    drawTask();
+  }, 1000);
 }
 
 function previousYear() {
-  document.getElementById("days").innerHTML = "";
-  yyyy = parseInt(yyyy) - 1;
-  var firstDay = new Date(mm + " 01, " + yyyy + " 00:00:00").getDay();
-  firstDay == 0 ? (firstDay = 7) : firstDay;
-  var monthLength = new Date(yyyy, mm, 0).getDate();
-  drawCalendar(firstDay, monthLength);
-  drawTask();
-  let today = document.getElementById("todayIs");
-  today.innerHTML = dd + " / " + mm + " / " + yyyy;
+  document.getElementById("calendar").style.opacity = 0;
+  setTimeout(function () {
+    document.getElementById("days").innerHTML = "";
+    yyyy = parseInt(yyyy) - 1;
+    calendar.innerHTML = monthNames[mm - 1] + " " + yyyy;
+    var firstDay = new Date(mm + " 01, " + yyyy + " 00:00:00").getDay();
+    firstDay == 0 ? (firstDay = 7) : firstDay;
+    var monthLength = new Date(yyyy, mm, 0).getDate();
+    drawCalendar(firstDay, monthLength);
+    drawTask();
+  }, 1000);
 }
 
 function hoveringIn(event) {

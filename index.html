@@ -20,7 +20,7 @@
                 <button id="backYear" class="arrow"><<</button>
                 <button id="backward" class="arrow"><</button>
             </div>
-            <h1>Calendar</h1>
+            <h1 id="calendarTitle">Calendar</h1>
             <div>
                 <button id="forward" class="arrow">></button>
                 <button id="forwYear" class="arrow">>></button>
@@ -29,7 +29,7 @@
         </div>
         <button class="addActivity" id="addActivity">+</button>
         <div class="container">
-            <div class="today-is" id="todayIs">Monday, July 20, 2015</div>
+            <div class="today-is" id="todayIs"> Monday, July 20, 2015</div>
             <div class="week-days" id="weekDays">
                 <div>Monday</div>
                 <div>Tuesday</div>
@@ -64,6 +64,9 @@
 
                     <label class="form-content check-final" for="final-date">Final Date:</label>
                     <input class="form-content check-final" type="date" id="final-date" required />
+
+                    <label class="form-content check-final" for="final-date">Final Hour:</label>
+                    <input class="form-content check-final" type="time" id="final-time" required />
 
                     <label class="form-content" for="remind-me">Remind me when this event expires:</label>
                     <input class="form-content" type="checkbox" id="remind-me" for="exp-time" />

@@ -1,5 +1,19 @@
 /* GLOBAL VARIABLES */
 let storage = window.localStorage;
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 /* DATE VARIABLES */
 const day = new Date();
@@ -18,3 +32,6 @@ var modal2 = document.getElementById("modal-container2");
 /*TODAY*/
 let today = document.getElementById("todayIs");
 today.innerHTML = dd + " / " + mm + " / " + yyyy;
+
+let calendar = document.getElementById("calendarTitle");
+calendar.innerHTML = monthNames[day.getMonth()] + " " + yyyy;

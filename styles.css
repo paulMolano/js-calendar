@@ -116,6 +116,13 @@ body {
   display: flex;
   flex-direction: column;
 }
+.today {
+  text-align: center;
+  background-color: rgb(255, 252, 71);
+  color: red;
+  border: solid red 2px;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
 
 .today-is {
   text-align: center;
@@ -179,6 +186,8 @@ body {
 .calendar {
   z-index: 2;
   position: relative;
+  transition: opacity 1s;
+  -webkit-transition: opacity 1s;
 }
 
 .display-none {
