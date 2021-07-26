@@ -65,7 +65,6 @@ function drawCalendar(firstDay, monthLength) {
 }
 
 function newTask() {
-  console.log();
   modal.classList.replace("display-none", "modal-display-on");
 }
 
@@ -215,7 +214,8 @@ function readTask(e) {
 }
 
 function deleteTask(e) {
-  let id = e.target.dataset.id;
+  let id;
+  e.target.dataset.id ? (id = e.target.dataset.id) : (id = selectTask);
   let tasksObject = storage.getItem("taskStorage");
   tasksObject = JSON.parse(tasksObject);
   let idsList = storage.getItem(mm + "-" + yyyy);
@@ -252,6 +252,7 @@ function editTask(e) {
       document.getElementById("event-type").value = tasksObject[i].type;
     }
   }
+  deleteTask(e);
 }
 
 function infoTask(e) {
