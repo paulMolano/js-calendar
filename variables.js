@@ -16,9 +16,12 @@ const monthNames = [
 ];
 
 /* DATE VARIABLES */
+//! function getCurrentTime()
 const day = new Date();
 var dd = String(day.getDate());
 var mm = String(day.getMonth() + 1).padStart(2, "0");
+var currentHours = day.getHours();
+var currentMinutes = day.getMinutes();
 var yyyy = day.getFullYear();
 var firstDay = new Date(mm + " 01, " + yyyy + " 00:00:00").getDay();
 firstDay == 0 ? (firstDay = 7) : firstDay;

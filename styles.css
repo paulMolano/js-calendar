@@ -257,7 +257,7 @@ body {
 }
 
 .looking {
-  transform: scale(1);
+  transform: scale(1.1);
   border-color: tomato;
   box-shadow: 0 0 1rem tomato;
 }

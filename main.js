@@ -2,3 +2,4 @@
 
 drawCalendar(firstDay, monthLength);
 drawTask();
+newDay();
