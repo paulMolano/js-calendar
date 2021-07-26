@@ -35,15 +35,64 @@ document.getElementById("backYear").addEventListener("click", previousYear);
 let editDelTasks = document.querySelectorAll(".event-style");
 
 //?----------------------------------------------------- FUNCTIONS ---------------------------------------------------\\
+function newDay() {
+  const day = new Date();
+  let currentHours = day.getHours();
+  let currentMinutes = day.getMinutes();
+  let newday = ((23 - currentHours) * 3600 + (60 - currentMinutes) * 60) * 1000;
+  setTimeout(function () {
+    drawCalendar(firstDay, monthLength);
+    drawTask();
+  }, newday);
+}
+
 function addReminder() {
-  let string = String(mm).padStart(2, "0");
-  let idsList = storage.getItem(string + "-" + yyyy);
+  const day = new Date();
+  let dd = String(day.getDate());
+  let mm = String(day.getMonth() + 1).padStart(2, "0");
+  let yyyy = day.getFullYear();
+  let currentHours = day.getHours();
+  let currentMinutes = day.getMinutes();
+  let idsList = storage.getItem(mm + "-" + yyyy);
   idsList = JSON.parse(idsList);
   let tasksObject = storage.getItem("taskStorage");
   tasksObject = JSON.parse(tasksObject);
   if (idsList) {
     for (const id of idsList) {
-      for (let i = 0; i < tasksObject.length; i++) {}
+      for (let i = 0; i < tasksObject.length; i++) {
+        if (id == tasksObject[i].id) {
+          let initialDate = tasksObject[i].initialDate;
+          let initialDay = initialDate.split("-");
+          if (dd === initialDay[2]) {
+            let expTime = tasksObject[i].expTime.split(":");
+            let expMinutes = parseInt(expTime[1]);
+            let finalHour = tasksObject[i].finalHour.split(":");
+            let fHours = parseInt(finalHour[0]);
+            let fMinutes = parseInt(finalHour[1]);
+
+            let reminderMinutes = fMinutes - expMinutes;
+            if (reminderMinutes >= 60) {
+              fHours += 1;
+              reminderMinutes = reminderMinutes % 60;
+            } else if (reminderMinutes < 0) {
+              fHours -= 1;
+              reminderMinutes = 60 + reminderMinutes;
+            }
+
+            let reminderHours = fHours - currentHours;
+            reminderMinutes -= currentMinutes;
+            let timeReminder = (reminderHours * 60 + reminderMinutes) * 60000;
+            if (timeReminder != NaN && timeReminder > 0) {
+              setTimeout(function () {
+                alert(
+                  `Aviso,quedan ${expMinutes} minutos para ${tasksObject[i].title}`
+                );
+              }, timeReminder);
+              console.log(timeReminder, initialDate, dd);
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -101,7 +150,7 @@ function validationForm() {
   for (const input of inputs) {
     input.value != "" ? count++ : false; //personalizar alert
   }
-  count == 3 ? saveTask() : alert("You must fill all the fields ");
+  count == 4 ? saveTask() : alert("You must fill all the fields ");
 }
 function newTask() {
   modal.classList.replace("display-none", "modal-display-on");
@@ -115,6 +164,12 @@ function newTaskpreDay(e) {
     let initialDate = document.getElementById("initial-date");
     mm = String(mm).padStart(2, "0");
     initialDate.value = `${yyyy}-${mm}-${daytotask}`;
+    let initialHour = document.getElementById("final-time");
+    currentHours < 10 ? (currentHours = "0" + currentHours) : currentHours;
+    currentMinutes < 10
+      ? (currentMinutes = "0" + currentMinutes)
+      : currentMinutes;
+    initialHour.value = `${currentHours}:${currentMinutes}`;
   }
 }
 
@@ -166,7 +221,7 @@ function saveTask() {
 }
 
 function drawTask() {
-  //! se podria eliminar el idsList???
+  addReminder();
   let string = String(mm).padStart(2, "0");
   let idsList = storage.getItem(string + "-" + yyyy);
   idsList = JSON.parse(idsList);
@@ -265,8 +320,26 @@ function deleteTask(e) {
     }
   }
 }
+function parseToHMS(time) {
+  var sec_num = parseInt(time, 10);
+  var hours = Math.floor(sec_num / 3600);
+  var minutes = Math.floor((sec_num - hours * 3600) / 60);
+  var seconds = sec_num - hours * 3600 - minutes * 60;
+
+  if (hours < 10) {
+    hours = "0" + hours;
+  }
+  if (minutes < 10) {
+    minutes = "0" + minutes;
+  }
+  if (seconds < 10) {
+    seconds = "0" + seconds;
+  }
+  return hours + ":" + minutes + ":" + seconds;
+}
 
 function editTask(e) {
+  //! checked
   let selectTask = e.target.dataset.id;
   let tasksObject = storage.getItem("taskStorage");
   tasksObject = JSON.parse(tasksObject);
@@ -279,6 +352,7 @@ function editTask(e) {
       document.getElementById("initial-date").value =
         tasksObject[i].initialDate;
       document.getElementById("final-date").value = tasksObject[i].finalDate;
+      document.getElementById("final-time").value = tasksObject[i].finalHour;
       document.getElementById("exp-time").value = tasksObject[i].expTime;
       document.getElementById("description").value = tasksObject[i].description;
       document.getElementById("event-type").value = tasksObject[i].type;
