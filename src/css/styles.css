@@ -31,6 +31,7 @@ body {
   background-color: var(--color);
   font-size: 2.3vh;
   text-transform: uppercase;
+  cursor: pointer;
 }
 .tasks-title {
   width: 100%;
@@ -103,6 +104,7 @@ body {
   background-color: var(--color);
   font-size: 5.5vh;
   border: none;
+  cursor: pointer;
 }
 
 .addActivity:hover {
@@ -123,6 +125,7 @@ body {
   color: white;
   border: none;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  cursor: pointer;
 }
 
 .week-days {
@@ -148,6 +151,7 @@ body {
   min-height: 14vh;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   max-height: 14vh;
+  cursor: pointer;
 }
 
 .tasks-object {
@@ -212,6 +216,7 @@ body {
 
 .form-content {
   padding: 0.5vh;
+  cursor: pointer;
 }
 
 .display-flex-column {
@@ -222,6 +227,10 @@ body {
 .tasks-modal {
   position: sticky;
   background-color: white;
+}
+
+.modal-btn {
+  cursor: pointer;
 }
 
 /* !CHECKBOX */
@@ -257,7 +266,7 @@ body {
 }
 
 .looking {
-  transform: scale(1.1);
+  transform: scale(0.95);
   border-color: var(--color);
   box-shadow: 0 0 1rem var(--color);
 }
@@ -292,6 +301,7 @@ body {
   background-color: transparent;
   border: none;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 img {
   width: 82px;

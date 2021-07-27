@@ -77,3 +77,7 @@ function previousYear() {
     drawTask();
   }, 1000);
 }
+
+today.addEventListener("click", () => {
+  location.reload();
+});
