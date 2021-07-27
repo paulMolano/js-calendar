@@ -1,14 +1,14 @@
 function newDay() {
-  const day = new Date();
-  let currentHours = day.getHours();
-  let currentMinutes = day.getMinutes();
-  console.log(currentHours, currentMinutes);
-  let newday = ((23 - currentHours) * 3600 + (60 - currentMinutes) * 60) * 1000;
+  let newday =
+    ((23 - getCurrentTime().hours) * 3600 +
+      (60 - getCurrentTime().minutes) * 60) *
+    1000;
   setTimeout(function () {
     drawCalendar(firstDay, monthLength);
     drawTask();
   }, newday);
 }
+
 function nextMonth() {
   document.getElementById("calendar").style.opacity = 0;
   setTimeout(function () {
