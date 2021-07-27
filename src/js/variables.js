@@ -64,3 +64,10 @@ function getCurrentTime() {
   };
   return date;
 }
+
+/*HEADER DATE*/
+let today = document.getElementById("todayIs");
+today.innerHTML = dd + " / " + mm + " / " + yyyy;
+const day = new Date();
+let calendar = document.getElementById("calendarTitle");
+calendar.innerHTML = monthNames[day.getMonth()] + " " + yyyy;

@@ -32,23 +32,13 @@ function drawCalendar(firstDay, monthLength) {
 }
 
 function todayIs() {
-  /*HEADER DATE*/
-  let today = document.getElementById("todayIs");
-  today.innerHTML = dd + " / " + mm + " / " + yyyy;
-  const day = new Date();
-  let calendar = document.getElementById("calendarTitle");
-  calendar.innerHTML = monthNames[day.getMonth()] + " " + yyyy;
-  /*SQUARE TODAY*/
-  var currentDay = String(day.getDate());
-  var currentMonth = String(day.getMonth() + 1).padStart(2, "0");
-  var currentYear = day.getFullYear();
-  if (currentMonth == mm && currentYear == yyyy) {
-    document.getElementById(currentDay).style.fontWeight = "bold";
+  if (getCurrentTime().month == mm && getCurrentTime().year == yyyy) {
+    document.getElementById(getCurrentTime().day).style.fontWeight = "bold";
     let color = getComputedStyle(document.documentElement).getPropertyValue(
       "--color"
     );
 
-    document.getElementById(currentDay).style.border =
+    document.getElementById(getCurrentTime().day).style.border =
       "solid " + color + " 4px";
   }
 }
