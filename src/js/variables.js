@@ -1,6 +1,19 @@
 /* GLOBAL VARIABLES */
 
 let storage = window.localStorage;
+let taskObject = [
+  {
+    description: "0",
+    expTime: "0",
+    finalDate: "",
+    finalHour: "00:00",
+    id: 0,
+    initialDate: "0000-00-00",
+    title: "0",
+  },
+];
+storage.setItem("taskStorage", JSON.stringify(taskObject));
+
 const monthNames = [
   "January",
   "February",
@@ -29,14 +42,7 @@ var modal = document.getElementById("modal-container");
 var inputs = document.querySelectorAll("input");
 var modal2 = document.getElementById("modal-container2");
 
-/*TODAY*/
-let today = document.getElementById("todayIs");
-today.innerHTML = dd + " / " + mm + " / " + yyyy;
-const day = new Date();
-let calendar = document.getElementById("calendarTitle");
-calendar.innerHTML = monthNames[day.getMonth()] + " " + yyyy;
-
-/* DATE VARIABLES */
+//?--------------------------------------------------- FUNCTION CURRENT-TIME---------------------------------------------------\\
 function getCurrentTime() {
   const day = new Date();
   var dd = String(day.getDate());

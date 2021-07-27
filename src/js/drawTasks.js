@@ -53,10 +53,6 @@ function drawTask() {
 }
 
 function addReminder() {
-  let idsList = storage.getItem(
-    getCurrentTime().month + "-" + getCurrentTime().year
-  );
-  idsList = JSON.parse(idsList);
   let tasksObject = storage.getItem("taskStorage");
   tasksObject = JSON.parse(tasksObject);
   for (let i = 0; i < tasksObject.length; i++) {

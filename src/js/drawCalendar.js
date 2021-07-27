@@ -32,7 +32,13 @@ function drawCalendar(firstDay, monthLength) {
 }
 
 function todayIs() {
+  /*HEADER DATE*/
+  let today = document.getElementById("todayIs");
+  today.innerHTML = dd + " / " + mm + " / " + yyyy;
   const day = new Date();
+  let calendar = document.getElementById("calendarTitle");
+  calendar.innerHTML = monthNames[day.getMonth()] + " " + yyyy;
+  /*SQUARE TODAY*/
   var currentDay = String(day.getDate());
   var currentMonth = String(day.getMonth() + 1).padStart(2, "0");
   var currentYear = day.getFullYear();
