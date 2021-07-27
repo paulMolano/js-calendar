@@ -1,110 +1,93 @@
 function drawTask() {
   addReminder();
-  let string = String(mm).padStart(2, "0");
-  let idsList = storage.getItem(string + "-" + yyyy);
-  idsList = JSON.parse(idsList);
   let tasksObject = storage.getItem("taskStorage");
   tasksObject = JSON.parse(tasksObject);
-  if (idsList) {
-    for (const id of idsList) {
-      for (let i = 0; i < tasksObject.length; i++) {
-        let abr = document.getElementById("event-" + tasksObject[i].id);
-        if (id == tasksObject[i].id && !abr) {
-          //seleccionamos casilla
-          let initialDay = tasksObject[i].initialDate;
-          let theinitialDay = initialDay.split("-");
-          theinitialDay = theinitialDay[2];
-          let toWrite = document.getElementById(theinitialDay);
+  for (let i = 0; i < tasksObject.length; i++) {
+    let initialDate = tasksObject[i].initialDate;
+    initialDate = initialDate.split("-");
+    let drawn = document.getElementById("event-" + tasksObject[i].id);
+    if (mm == initialDate[1] && !drawn) {
+      //seleccionamos casilla
 
-          //pintamos el evento
-          let drawEvent = document.createElement("div");
-          drawEvent.setAttribute("id", "event-" + tasksObject[i].id);
-          drawEvent.setAttribute("data-id", tasksObject[i].id);
-          drawEvent.setAttribute("class", "tasks-object");
-          toWrite.appendChild(drawEvent);
+      let toWrite = document.getElementById(initialDate[2]);
 
-          //pintamos el titulo
-          let drawTitle = document.createElement("div");
-          drawTitle.innerHTML = tasksObject[i].title;
-          drawTitle.setAttribute("id", "title-" + tasksObject[i].id);
-          drawTitle.setAttribute("data-id", tasksObject[i].id);
-          drawTitle.setAttribute("class", "tasks-title");
-          drawEvent.appendChild(drawTitle);
+      //pintamos el evento
+      let drawEvent = document.createElement("div");
+      drawEvent.setAttribute("id", "event-" + tasksObject[i].id);
+      drawEvent.setAttribute("data-id", tasksObject[i].id);
+      drawEvent.setAttribute("class", "tasks-object");
+      toWrite.appendChild(drawEvent);
 
-          //pintamos el modal info oculto
-          let drawEventInfo = document.createElement("div");
-          drawEventInfo.innerHTML = "";
-          drawEventInfo.setAttribute("id", "info-" + tasksObject[i].id);
-          drawEventInfo.setAttribute("class", "tasks-modal");
-          toWrite.appendChild(drawEventInfo);
+      //pintamos el titulo
+      let drawTitle = document.createElement("div");
+      drawTitle.innerHTML = tasksObject[i].title;
+      drawTitle.setAttribute("id", "title-" + tasksObject[i].id);
+      drawTitle.setAttribute("data-id", tasksObject[i].id);
+      drawTitle.setAttribute("class", "tasks-title");
+      drawEvent.appendChild(drawTitle);
 
-          //pintamos el boton delete
-          var deleteButton = document.createElement("div");
-          deleteButton.classList.add("delete-button");
-          deleteButton.setAttribute("id", "delete-" + tasksObject[i].id);
-          deleteButton.setAttribute("data-id", tasksObject[i].id);
-          deleteButton.innerHTML = "-";
-          drawEvent.appendChild(deleteButton);
+      //pintamos el modal info oculto
+      let drawEventInfo = document.createElement("div");
+      drawEventInfo.innerHTML = "";
+      drawEventInfo.setAttribute("id", "info-" + tasksObject[i].id);
+      drawEventInfo.setAttribute("class", "tasks-modal");
+      toWrite.appendChild(drawEventInfo);
 
-          //añadimos eventos
-          drawTitle.addEventListener("click", editTask);
-          deleteButton.addEventListener("click", deleteTask);
-          drawEvent.addEventListener("mouseover", infoTask);
-          drawEvent.addEventListener("mouseout", function () {
-            document.getElementById("infoDiv").remove();
-          });
-        }
-      }
+      //pintamos el boton delete
+      var deleteButton = document.createElement("div");
+      deleteButton.classList.add("delete-button");
+      deleteButton.setAttribute("id", "delete-" + tasksObject[i].id);
+      deleteButton.setAttribute("data-id", tasksObject[i].id);
+      deleteButton.innerHTML = "-";
+      drawEvent.appendChild(deleteButton);
+
+      //añadimos eventos
+      drawTitle.addEventListener("click", editTask);
+      deleteButton.addEventListener("click", deleteTask);
+      drawEvent.addEventListener("mouseover", infoTask);
+      drawEvent.addEventListener("mouseout", function () {
+        document.getElementById("infoDiv").remove();
+      });
     }
   }
 }
 
 function addReminder() {
-  const day = new Date();
-  let dd = String(day.getDate());
-  let mm = String(day.getMonth() + 1).padStart(2, "0");
-  let yyyy = day.getFullYear();
-  let currentHours = day.getHours();
-  let currentMinutes = day.getMinutes();
-  let idsList = storage.getItem(mm + "-" + yyyy);
+  let idsList = storage.getItem(
+    getCurrentTime().month + "-" + getCurrentTime().year
+  );
   idsList = JSON.parse(idsList);
   let tasksObject = storage.getItem("taskStorage");
   tasksObject = JSON.parse(tasksObject);
-  if (idsList) {
-    for (const id of idsList) {
-      for (let i = 0; i < tasksObject.length; i++) {
-        if (id == tasksObject[i].id) {
-          let title = tasksObject[i].title;
-          let initialDate = tasksObject[i].initialDate;
-          let initialDay = initialDate.split("-");
-          if (dd === initialDay[2]) {
-            let expTime = tasksObject[i].expTime.split(":");
-            let expMinutes = parseInt(expTime[1]);
-            let finalHour = tasksObject[i].finalHour.split(":");
-            let fHours = parseInt(finalHour[0]);
-            let fMinutes = parseInt(finalHour[1]);
+  for (let i = 0; i < tasksObject.length; i++) {
+    let title = tasksObject[i].title;
+    let initialDate = tasksObject[i].initialDate;
+    let initialDay = initialDate.split("-");
+    if (getCurrentTime().day == initialDay[2]) {
+      let expTime = tasksObject[i].expTime.split(":");
+      let expMinutes = parseInt(expTime[1]);
+      let finalHour = tasksObject[i].finalHour.split(":");
+      let fHours = parseInt(finalHour[0]);
+      let fMinutes = parseInt(finalHour[1]);
 
-            let reminderMinutes = fMinutes - expMinutes;
-            if (reminderMinutes >= 60) {
-              fHours += 1;
-              reminderMinutes = reminderMinutes % 60;
-            } else if (reminderMinutes < 0) {
-              fHours -= 1;
-              reminderMinutes = 60 + reminderMinutes;
-            }
+      let reminderMinutes = fMinutes - expMinutes;
+      if (reminderMinutes >= 60) {
+        fHours += 1;
+        reminderMinutes = reminderMinutes % 60;
+      } else if (reminderMinutes < 0) {
+        fHours -= 1;
+        reminderMinutes = 60 + reminderMinutes;
+      }
 
-            let reminderHours = fHours - currentHours;
-            reminderMinutes -= currentMinutes;
-            let timeReminder = (reminderHours * 60 + reminderMinutes) * 60000;
-            console.log(timeReminder, initialDate, dd);
-            if (timeReminder != NaN && timeReminder > 0) {
-              setTimeout(function () {
-                showPopup(expMinutes, title);
-              }, timeReminder);
-              console.log(timeReminder, initialDate, dd);
-            }
-          }
-        }
+      let reminderHours = fHours - getCurrentTime().hours;
+      reminderMinutes -= getCurrentTime().minutes;
+      let timeReminder = (reminderHours * 60 + reminderMinutes) * 60000;
+
+      if (timeReminder != NaN && timeReminder > 0) {
+        setTimeout(function () {
+          showPopup(expMinutes, title);
+        }, timeReminder);
+        console.log(timeReminder, initialDate, getCurrentTime().day);
       }
     }
   }
