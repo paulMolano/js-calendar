@@ -41,6 +41,7 @@ function saveTask() {
 }
 
 function deleteTask(e) {
+  mm = String(mm).padStart(2, "0");
   let id;
   e.target.dataset.id ? (id = e.target.dataset.id) : (id = selectTask);
   let tasksObject = storage.getItem("taskStorage");

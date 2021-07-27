@@ -33,6 +33,7 @@ function cancelTask() {
 
 function editTask(e) {
   //! checked
+  mm = String(mm).padStart(2, "0");
   let selectTask = e.target.dataset.id;
   let tasksObject = storage.getItem("taskStorage");
   tasksObject = JSON.parse(tasksObject);
