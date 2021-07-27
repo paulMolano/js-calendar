@@ -8,7 +8,7 @@ function drawTask() {
     let initialDate = tasksObject[i].initialDate;
     initialDate = initialDate.split("-");
     let drawn = document.getElementById("event-" + tasksObject[i].id);
-    if (mm == initialDate[1] && !drawn) {
+    if (mm == initialDate[1] && yyyy == initialDate[0] && !drawn) {
       //*select the square
       let toWrite = document.getElementById(initialDate[2]);
 
