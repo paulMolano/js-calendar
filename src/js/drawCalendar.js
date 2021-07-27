@@ -22,8 +22,8 @@ function drawCalendar(firstDay, monthLength) {
       square.addEventListener("click", newTaskpreDay); // se la ponemos al boton
       square.addEventListener("mouseover", hoveringIn);
       square.addEventListener("mouseout", hoveringOut);
+      square.setAttribute("class", "day-style");
     }
-    square.setAttribute("class", "day-style");
     monthDays.appendChild(square);
   }
   todayIs();
