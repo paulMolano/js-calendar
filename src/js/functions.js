@@ -32,8 +32,6 @@ document.getElementById("backward").addEventListener("click", previousMonth);
 document.getElementById("forwYear").addEventListener("click", nextYear);
 document.getElementById("backYear").addEventListener("click", previousYear);
 
-let editDelTasks = document.querySelectorAll(".event-style");
-
 //?----------------------------------------------------- FUNCTIONS ---------------------------------------------------\\
 function newDay() {
   const day = new Date();
@@ -148,10 +146,13 @@ function todayIs() {
   var currentMonth = String(day.getMonth() + 1).padStart(2, "0");
   var currentYear = day.getFullYear();
   if (currentMonth == mm && currentYear == yyyy) {
-    document.getElementById(currentDay).style.color = "red";
-    document.getElementById(currentDay).style.backgroundColor =
-      " rgb(255, 252, 71)";
-    document.getElementById(currentDay).style.border = "solid red 2px";
+    document.getElementById(currentDay).style.fontWeight = "bold";
+    let color = getComputedStyle(document.documentElement).getPropertyValue(
+      "--color"
+    );
+
+    document.getElementById(currentDay).style.border =
+      "solid " + color + " 4px";
   }
 }
 
