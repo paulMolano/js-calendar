@@ -60,9 +60,13 @@ function drawTask() {
 }
 
 function addReminder() {
-  let idsList = storage.getItem(
-    getCurrentTime().month + "-" + getCurrentTime().year
-  );
+  const day = new Date();
+  let dd = String(day.getDate());
+  let mm = String(day.getMonth() + 1).padStart(2, "0");
+  let yyyy = day.getFullYear();
+  let currentHours = day.getHours();
+  let currentMinutes = day.getMinutes();
+  let idsList = storage.getItem(mm + "-" + yyyy);
   idsList = JSON.parse(idsList);
   let tasksObject = storage.getItem("taskStorage");
   tasksObject = JSON.parse(tasksObject);
@@ -73,7 +77,7 @@ function addReminder() {
           let title = tasksObject[i].title;
           let initialDate = tasksObject[i].initialDate;
           let initialDay = initialDate.split("-");
-          if (getCurrentTime().day === initialDay[2]) {
+          if (dd === initialDay[2]) {
             let expTime = tasksObject[i].expTime.split(":");
             let expMinutes = parseInt(expTime[1]);
             let finalHour = tasksObject[i].finalHour.split(":");
@@ -89,15 +93,15 @@ function addReminder() {
               reminderMinutes = 60 + reminderMinutes;
             }
 
-            let reminderHours = fHours - getCurrentTime().hours;
-            reminderMinutes -= getCurrentTime().minutes;
+            let reminderHours = fHours - currentHours;
+            reminderMinutes -= currentMinutes;
             let timeReminder = (reminderHours * 60 + reminderMinutes) * 60000;
-            console.log(timeReminder, initialDate, getCurrentTime().day);
+            console.log(timeReminder, initialDate, dd);
             if (timeReminder != NaN && timeReminder > 0) {
               setTimeout(function () {
                 showPopup(expMinutes, title);
               }, timeReminder);
-              console.log(timeReminder, initialDate, getCurrentTime().day);
+              console.log(timeReminder, initialDate, dd);
             }
           }
         }
