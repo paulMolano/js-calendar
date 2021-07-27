@@ -1,4 +1,4 @@
-//?----------------------------------------------------- EVENTS ---------------------------------------------------\\
+/* //?----------------------------------------------------- EVENTS ---------------------------------------------------\\
 var btnNewAct = document
   .getElementById("addActivity")
   .addEventListener("click", newTask);
@@ -30,84 +30,10 @@ document.addEventListener("click", (e) => {
 document.getElementById("forward").addEventListener("click", nextMonth);
 document.getElementById("backward").addEventListener("click", previousMonth);
 document.getElementById("forwYear").addEventListener("click", nextYear);
-document.getElementById("backYear").addEventListener("click", previousYear);
+document.getElementById("backYear").addEventListener("click", previousYear); */
 
-//?----------------------------------------------------- FUNCTIONS ---------------------------------------------------\\
-function newDay() {
-  const day = new Date();
-  let currentHours = day.getHours();
-  let currentMinutes = day.getMinutes();
-  let newday = ((23 - currentHours) * 3600 + (60 - currentMinutes) * 60) * 1000;
-  setTimeout(function () {
-    drawCalendar(firstDay, monthLength);
-    drawTask();
-  }, newday);
-}
-
-function addReminder() {
-  const day = new Date();
-  let dd = String(day.getDate());
-  let mm = String(day.getMonth() + 1).padStart(2, "0");
-  let yyyy = day.getFullYear();
-  let currentHours = day.getHours();
-  let currentMinutes = day.getMinutes();
-  let idsList = storage.getItem(mm + "-" + yyyy);
-  idsList = JSON.parse(idsList);
-  let tasksObject = storage.getItem("taskStorage");
-  tasksObject = JSON.parse(tasksObject);
-  if (idsList) {
-    for (const id of idsList) {
-      for (let i = 0; i < tasksObject.length; i++) {
-        if (id == tasksObject[i].id) {
-          let title = tasksObject[i].title;
-          let initialDate = tasksObject[i].initialDate;
-          let initialDay = initialDate.split("-");
-          if (dd === initialDay[2]) {
-            let expTime = tasksObject[i].expTime.split(":");
-            let expMinutes = parseInt(expTime[1]);
-            let finalHour = tasksObject[i].finalHour.split(":");
-            let fHours = parseInt(finalHour[0]);
-            let fMinutes = parseInt(finalHour[1]);
-
-            let reminderMinutes = fMinutes - expMinutes;
-            if (reminderMinutes >= 60) {
-              fHours += 1;
-              reminderMinutes = reminderMinutes % 60;
-            } else if (reminderMinutes < 0) {
-              fHours -= 1;
-              reminderMinutes = 60 + reminderMinutes;
-            }
-
-            let reminderHours = fHours - currentHours;
-            reminderMinutes -= currentMinutes;
-            let timeReminder = (reminderHours * 60 + reminderMinutes) * 60000;
-            console.log(timeReminder, initialDate, dd);
-            if (timeReminder != NaN && timeReminder > 0) {
-              setTimeout(function () {
-                showPopup(expMinutes, title);
-              }, timeReminder);
-              console.log(timeReminder, initialDate, dd);
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-function showPopup(expMinutes, title) {
-  document.getElementById(
-    "popup-text"
-  ).innerHTML = `Aviso,quedan ${expMinutes} minutos para ${title}`;
-  document.getElementById("popup").style.display = "block";
-  var audio = new Audio("alarm.ogg");
-  audio.play();
-  document.getElementById("time-up").addEventListener("click", function () {
-    document.getElementById("popup").style.display = "none";
-  });
-}
-
-function drawCalendar(firstDay, monthLength) {
+//?----------------------------------------------------- Draw Calendar ---------------------------------------------------\\
+/* function drawCalendar(firstDay, monthLength) {
   let monthDays = document.getElementById("days");
   monthDays.innerHTML = "";
   if (
@@ -154,9 +80,10 @@ function todayIs() {
     document.getElementById(currentDay).style.border =
       "solid " + color + " 4px";
   }
-}
+} */
 
-function validationForm() {
+//?----------------------------------------------------- Manage Tasks ---------------------------------------------------\\
+/* function validationForm() {
   let inputs = document.querySelectorAll(".required");
   let count = 0;
   for (const input of inputs) {
@@ -189,7 +116,38 @@ function cancelTask() {
   modal.classList.replace("modal-display-on", "display-none");
 }
 
-function saveTask() {
+function editTask(e) {
+  //! checked
+  let selectTask = e.target.dataset.id;
+  let tasksObject = storage.getItem("taskStorage");
+  tasksObject = JSON.parse(tasksObject);
+
+  for (let i = 0; i < tasksObject.length; i++) {
+    if (selectTask == tasksObject[i].id) {
+      modal.classList.replace("display-none", "modal-display-on");
+      document.getElementById("taskId").value = tasksObject[i].id;
+      document.getElementById("title").value = tasksObject[i].title;
+      document.getElementById("initial-date").value =
+        tasksObject[i].initialDate;
+      document.getElementById("final-date").value = tasksObject[i].finalDate;
+      document.getElementById("final-time").value = tasksObject[i].finalHour;
+      document.getElementById("exp-time").value = tasksObject[i].expTime;
+      document.getElementById("description").value = tasksObject[i].description;
+      document.getElementById("event-type").value = tasksObject[i].type;
+      document
+        .getElementById("save")
+        .setAttribute("data-id", tasksObject[i].id);
+    }
+  }
+
+  document.getElementById("save").addEventListener("click", function save(e) {
+    deleteTask(e);
+  });
+  document.getElementById("save").removeEventListener("click", save);
+} */
+
+//?----------------------------------------------------- Storage Tasks ---------------------------------------------------\\
+/* function saveTask() {
   let initialDate = document.getElementById("initial-date").value; //fecha incial input
   let dateSplit = initialDate.split("-"); //array fecha incial input
   let monthId = dateSplit[1] + "-" + dateSplit[0]; //creamos el identificado del mes [mes-año]
@@ -231,7 +189,29 @@ function saveTask() {
   cancelTask();
 }
 
-function drawTask() {
+function deleteTask(e) {
+  let id;
+  e.target.dataset.id ? (id = e.target.dataset.id) : (id = selectTask);
+  let tasksObject = storage.getItem("taskStorage");
+  tasksObject = JSON.parse(tasksObject);
+  let idsList = storage.getItem(mm + "-" + yyyy);
+  idsList = JSON.parse(idsList);
+  for (let i = 0; i < tasksObject.length; i++) {
+    if (id == tasksObject[i].id) {
+      let deleteIndex = tasksObject.indexOf(tasksObject[i]);
+      tasksObject.splice(deleteIndex, 1);
+      storage.setItem("taskStorage", JSON.stringify(tasksObject));
+      let deleteIdsList = idsList.indexOf(id);
+      idsList.splice(deleteIdsList, 1);
+      storage.setItem(mm + "-" + yyyy, JSON.stringify(idsList));
+      document.getElementById("event-" + id).remove();
+      document.getElementById("info-" + id).remove();
+    }
+  }
+} */
+
+//?----------------------------------------------------- Draw Tasks ---------------------------------------------------\\
+/* function drawTask() {
   addReminder();
   let string = String(mm).padStart(2, "0");
   let idsList = storage.getItem(string + "-" + yyyy);
@@ -292,91 +272,55 @@ function drawTask() {
   }
 }
 
-function readTask(e) {
-  let selectTask = e.target.id;
-  let tasksObject = storage.getItem("taskStorage");
-  tasksObject = JSON.parse(tasksObject);
-
-  for (let i = 0; i < tasksObject.length; i++) {
-    if (selectTask == tasksObject[i].id) {
-      modal.classList.replace("display-none", "modal-display-on");
-      document.getElementById("title").value = tasksObject[i].title;
-      document.getElementById("initial-date").value =
-        tasksObject[i].initialDate;
-      document.getElementById("final-date").value = tasksObject[i].finalDate;
-      document.getElementById("exp-time").value = tasksObject[i].expTime;
-      document.getElementById("description").value = tasksObject[i].description;
-      document.getElementById("event-type").value = tasksObject[i].type;
-    }
-  }
-}
-
-function deleteTask(e) {
-  let id;
-  e.target.dataset.id ? (id = e.target.dataset.id) : (id = selectTask);
-  let tasksObject = storage.getItem("taskStorage");
-  tasksObject = JSON.parse(tasksObject);
+function addReminder() {
+  const day = new Date();
+  let dd = String(day.getDate());
+  let mm = String(day.getMonth() + 1).padStart(2, "0");
+  let yyyy = day.getFullYear();
+  let currentHours = day.getHours();
+  let currentMinutes = day.getMinutes();
   let idsList = storage.getItem(mm + "-" + yyyy);
   idsList = JSON.parse(idsList);
-  for (let i = 0; i < tasksObject.length; i++) {
-    if (id == tasksObject[i].id) {
-      let deleteIndex = tasksObject.indexOf(tasksObject[i]);
-      tasksObject.splice(deleteIndex, 1);
-      storage.setItem("taskStorage", JSON.stringify(tasksObject));
-      let deleteIdsList = idsList.indexOf(id);
-      idsList.splice(deleteIdsList, 1);
-      storage.setItem(mm + "-" + yyyy, JSON.stringify(idsList));
-      document.getElementById("event-" + id).remove();
-      document.getElementById("info-" + id).remove();
-    }
-  }
-}
-function parseToHMS(time) {
-  var sec_num = parseInt(time, 10);
-  var hours = Math.floor(sec_num / 3600);
-  var minutes = Math.floor((sec_num - hours * 3600) / 60);
-  var seconds = sec_num - hours * 3600 - minutes * 60;
-
-  if (hours < 10) {
-    hours = "0" + hours;
-  }
-  if (minutes < 10) {
-    minutes = "0" + minutes;
-  }
-  if (seconds < 10) {
-    seconds = "0" + seconds;
-  }
-  return hours + ":" + minutes + ":" + seconds;
-}
-
-function editTask(e) {
-  //! checked
-  let selectTask = e.target.dataset.id;
   let tasksObject = storage.getItem("taskStorage");
   tasksObject = JSON.parse(tasksObject);
+  if (idsList) {
+    for (const id of idsList) {
+      for (let i = 0; i < tasksObject.length; i++) {
+        if (id == tasksObject[i].id) {
+          let title = tasksObject[i].title;
+          let initialDate = tasksObject[i].initialDate;
+          let initialDay = initialDate.split("-");
+          if (dd === initialDay[2]) {
+            let expTime = tasksObject[i].expTime.split(":");
+            let expMinutes = parseInt(expTime[1]);
+            let finalHour = tasksObject[i].finalHour.split(":");
+            let fHours = parseInt(finalHour[0]);
+            let fMinutes = parseInt(finalHour[1]);
 
-  for (let i = 0; i < tasksObject.length; i++) {
-    if (selectTask == tasksObject[i].id) {
-      modal.classList.replace("display-none", "modal-display-on");
-      document.getElementById("taskId").value = tasksObject[i].id;
-      document.getElementById("title").value = tasksObject[i].title;
-      document.getElementById("initial-date").value =
-        tasksObject[i].initialDate;
-      document.getElementById("final-date").value = tasksObject[i].finalDate;
-      document.getElementById("final-time").value = tasksObject[i].finalHour;
-      document.getElementById("exp-time").value = tasksObject[i].expTime;
-      document.getElementById("description").value = tasksObject[i].description;
-      document.getElementById("event-type").value = tasksObject[i].type;
-      document
-        .getElementById("save")
-        .setAttribute("data-id", tasksObject[i].id);
+            let reminderMinutes = fMinutes - expMinutes;
+            if (reminderMinutes >= 60) {
+              fHours += 1;
+              reminderMinutes = reminderMinutes % 60;
+            } else if (reminderMinutes < 0) {
+              fHours -= 1;
+              reminderMinutes = 60 + reminderMinutes;
+            }
+
+            let reminderHours = fHours - currentHours;
+            reminderMinutes -= currentMinutes;
+            let timeReminder = (reminderHours * 60 + reminderMinutes) * 60000;
+            console.log(timeReminder, initialDate, dd);
+            if (timeReminder != NaN && timeReminder > 0) {
+              setTimeout(function () {
+                showPopup(expMinutes, title);
+              }, timeReminder);
+              console.log(timeReminder, initialDate, dd);
+            }
+          }
+        }
+      }
     }
   }
-
-  document.getElementById("save").addEventListener("click", function save(e) {
-    deleteTask(e);
-  });
-  document.getElementById("save").removeEventListener("click", save);
 }
 
 function infoTask(e) {
@@ -409,7 +353,18 @@ function infoTask(e) {
     }
   }
 }
-
+ */
+//?----------------------------------------------------- Manage Calendar ---------------------------------------------------\\
+/* function newDay() {
+  const day = new Date();
+  let currentHours = day.getHours();
+  let currentMinutes = day.getMinutes();
+  let newday = ((23 - currentHours) * 3600 + (60 - currentMinutes) * 60) * 1000;
+  setTimeout(function () {
+    drawCalendar(firstDay, monthLength);
+    drawTask();
+  }, newday);
+}
 function nextMonth() {
   document.getElementById("calendar").style.opacity = 0;
   setTimeout(function () {
@@ -479,6 +434,20 @@ function previousYear() {
     drawTask();
   }, 1000);
 }
+ */
+//?----------------------------------------------------- Effects ---------------------------------------------------\\
+
+/* function showPopup(expMinutes, title) {
+  document.getElementById(
+    "popup-text"
+  ).innerHTML = `Aviso,quedan ${expMinutes} minutos para ${title}`;
+  document.getElementById("popup").style.display = "block";
+  var audio = new Audio("src/sound/alarm.ogg");
+  audio.play();
+  document.getElementById("time-up").addEventListener("click", function () {
+    document.getElementById("popup").style.display = "none";
+  });
+}
 
 function hoveringIn(event) {
   var btn = event.target;
@@ -497,4 +466,4 @@ function hoveringOut(e) {
   btn.classList.toggle("looking");
   let addbtn = document.getElementById("add-" + btn.id);
   addbtn ? addbtn.remove() : false;
-}
+} */
