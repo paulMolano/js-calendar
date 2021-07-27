@@ -1,18 +1,22 @@
 /* GLOBAL VARIABLES */
 
 let storage = window.localStorage;
-let taskObject = [
-  {
-    description: "0",
-    expTime: "0",
-    finalDate: "",
-    finalHour: "00:00",
-    id: 0,
-    initialDate: "0000-00-00",
-    title: "0",
-  },
-];
-storage.setItem("taskStorage", JSON.stringify(taskObject));
+
+var currentStorage = storage.getItem("taskStorage");
+if (!currentStorage) {
+  let taskObject = [
+    {
+      description: "0",
+      expTime: "0",
+      finalDate: "",
+      initialHour: "00:00",
+      id: 0,
+      initialDate: "0000-00-00",
+      title: "0",
+    },
+  ];
+  storage.setItem("taskStorage", JSON.stringify(taskObject));
+}
 
 const monthNames = [
   "January",

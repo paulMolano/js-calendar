@@ -1,4 +1,5 @@
 function newDay() {
+  //? Calc time left to new day
   let newday =
     ((23 - getCurrentTime().hours) * 3600 +
       (60 - getCurrentTime().minutes) * 60) *
@@ -24,8 +25,6 @@ function nextMonth() {
     var firstDay = new Date(mm + " 01, " + yyyy + " 00:00:00").getDay();
     firstDay == 0 ? (firstDay = 7) : firstDay;
     var monthLength = new Date(yyyy, mm, 0).getDate();
-
-    console.log(document.getElementById("calendar").style.opacity);
 
     drawCalendar(firstDay, monthLength);
     drawTask();

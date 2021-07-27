@@ -10,7 +10,7 @@ function saveTask() {
     title: document.getElementById("title").value,
     initialDate: document.getElementById("initial-date").value,
     finalDate: document.getElementById("final-date").value,
-    finalHour: document.getElementById("final-time").value,
+    initialHour: document.getElementById("final-time").value,
     expTime: document.getElementById("exp-time").value,
     description: document.getElementById("description").value,
     type: document.getElementById("event-type").value,

@@ -130,7 +130,7 @@ function editTask(e) {
       document.getElementById("initial-date").value =
         tasksObject[i].initialDate;
       document.getElementById("final-date").value = tasksObject[i].finalDate;
-      document.getElementById("final-time").value = tasksObject[i].finalHour;
+      document.getElementById("final-time").value = tasksObject[i].initialHour;
       document.getElementById("exp-time").value = tasksObject[i].expTime;
       document.getElementById("description").value = tasksObject[i].description;
       document.getElementById("event-type").value = tasksObject[i].type;
@@ -172,7 +172,7 @@ function editTask(e) {
     title: document.getElementById("title").value,
     initialDate: document.getElementById("initial-date").value,
     finalDate: document.getElementById("final-date").value,
-    finalHour: document.getElementById("final-time").value,
+    initialHour: document.getElementById("final-time").value,
     expTime: document.getElementById("exp-time").value,
     description: document.getElementById("description").value,
     type: document.getElementById("event-type").value,
@@ -293,9 +293,9 @@ function addReminder() {
           if (dd === initialDay[2]) {
             let expTime = tasksObject[i].expTime.split(":");
             let expMinutes = parseInt(expTime[1]);
-            let finalHour = tasksObject[i].finalHour.split(":");
-            let fHours = parseInt(finalHour[0]);
-            let fMinutes = parseInt(finalHour[1]);
+            let initialHour = tasksObject[i].initialHour.split(":");
+            let fHours = parseInt(initialHour[0]);
+            let fMinutes = parseInt(initialHour[1]);
 
             let reminderMinutes = fMinutes - expMinutes;
             if (reminderMinutes >= 60) {
@@ -333,14 +333,14 @@ function infoTask(e) {
       let title = tasksObject[i].title;
       let initialDate = tasksObject[i].initialDate;
       let finalDate = tasksObject[i].finalDate;
-      let finalHour = tasksObject[i].finalHour;
+      let initialHour = tasksObject[i].initialHour;
       let expTime = tasksObject[i].expTime;
       let description = tasksObject[i].description;
       let eventType = tasksObject[i].type;
 
       let infoTask = `<template id=infoTask><div class=" info-task" id="infoDiv">
         <h2 id="infoTitle">${title}</h2>
-        <p id="infoInitialDate">From ${initialDate} <span id="infoFinalDate">to ${finalDate} at ${finalHour} </span></p>
+        <p id="infoInitialDate">From ${initialDate} <span id="infoFinalDate">to ${finalDate} at ${initialHour} </span></p>
         <p id="infoEventType">Event type: ${eventType} <span id="remind">Reminder: ${expTime}</span></p>
         <p id="infoDescription">${description}</p>
     </div></template>`;

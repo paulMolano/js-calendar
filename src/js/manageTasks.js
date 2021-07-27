@@ -46,7 +46,7 @@ function editTask(e) {
       document.getElementById("initial-date").value =
         tasksObject[i].initialDate;
       document.getElementById("final-date").value = tasksObject[i].finalDate;
-      document.getElementById("final-time").value = tasksObject[i].finalHour;
+      document.getElementById("final-time").value = tasksObject[i].initialHour;
       document.getElementById("exp-time").value = tasksObject[i].expTime;
       document.getElementById("description").value = tasksObject[i].description;
       document.getElementById("event-type").value = tasksObject[i].type;

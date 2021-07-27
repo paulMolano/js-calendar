@@ -1,4 +1,5 @@
 function showPopup(expMinutes, title) {
+  //? Active and fill the reminder popup
   document.getElementById(
     "popup-text"
   ).innerHTML = `Aviso,quedan ${expMinutes} minutos para ${title}`;
@@ -11,6 +12,7 @@ function showPopup(expMinutes, title) {
 }
 
 function hoveringIn(event) {
+  //? toggle class & create add button in square hovered
   var btn = event.target;
   btn.classList.toggle("looking");
   if (btn.classList == "day-style looking") {
@@ -23,6 +25,7 @@ function hoveringIn(event) {
 }
 
 function hoveringOut(e) {
+  //? toggle class & destroy add button in square unhovered
   let btn = e.target;
   btn.classList.toggle("looking");
   let addbtn = document.getElementById("add-" + btn.id);
