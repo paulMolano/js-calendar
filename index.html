@@ -33,7 +33,6 @@
             </div>
 
         </div>
-        <button class="addActivity" id="addActivity">+</button>
         <div class="container">
             <div class="today-is" id="todayIs"></div>
             <div class="week-days" id="weekDays">
@@ -47,6 +46,7 @@
             </div>
             <div class="display-grid" id="days"></div>
         </div>
+        <button class="addActivity" id="addActivity">+</button>
     </div>
     <div id="modal-container" class="display-none">
         <div id="modal" class="modal">
@@ -60,22 +60,22 @@
                     <input id="taskId" name="taskId" type="hidden" value="none">
 
                     <label class="form-content" for="title">*Title:</label>
-                    <input class="form-content required" type="text" id="title"  maxlength="60" required >
+                    <input class="form-content required" type="text" id="title" maxlength="60" required>
 
                     <label class="form-content" for="initial-date">*Initial Date:</label>
-                    <input class="form-content required" type="date" id="initial-date" required >
+                    <input class="form-content required" type="date" id="initial-date" required>
 
-                    <label class="form-content" >*Hour:</label>
+                    <label class="form-content">*Hour:</label>
                     <input class="form-content required" type="time" id="final-time" required/>
 
                     <label class="form-content" for="end-date">End Date:</label>
-                    <input class="form-content" type="checkbox" id="end-date" for="final-date" >
+                    <input class="form-content" type="checkbox" id="end-date" for="final-date">
 
                     <label class="form-content check-final" for="final-date">Final Date:</label>
-                    <input class="form-content check-final" type="date" id="final-date" >
+                    <input class="form-content check-final" type="date" id="final-date">
 
                     <label class="form-content" for="remind-me">Remind me when this event expires:</label>
-                    <input class="form-content" type="checkbox" id="remind-me" for="exp-time" >
+                    <input class="form-content" type="checkbox" id="remind-me" for="exp-time">
 
                     <label class="form-content check-remind" for="exp-time">Remind me at:</label>
                     <select class="form-content check-remind" id="exp-time">
@@ -88,7 +88,7 @@
                             </select>
 
                     <label class="form-content" for="description">*Description:</label>
-                    <input class="form-content required" type="text" id="description" minlength="30" required >
+                    <input class="form-content required" type="text" id="description" minlength="30" required>
 
                     <label class="form-content" for="event-type">Event type:</label>
                     <select class="form-content" id="event-type">
@@ -102,8 +102,8 @@
             </div>
 
             <div class="btns">
-                <input class="modal-btn" type="button" value="Save" class="save" id="save" />
-                <input class="modal-btn" type="reset" value="Cancel" id="cancel"/>
+                <input class="modal-btn save" type="button" value="SAVE" class="save" id="save" />
+                <input class="modal-btn cancel" type="reset" value="CANCEL" id="cancel" />
             </div>
             </form>
         </div>
@@ -132,14 +132,28 @@
     <div id="popup" class="popup">
         <div class="container">
             <div class="popupContent" id="popupPopup">
-           <img src="src\img\timer.png" alt="popup-img" />
-           <p id="popup-text"></p>
-           <button id="time-up" class="accept">Time up!</button>
-           </div>
-           </div>
+                <img src="src\img\timer.png" alt="popup-img" />
+                <p id="popup-text"></p>
+                <button id="time-up" class="accept">Time up!</button>
+            </div>
+        </div>
     </div>
     </div>
     <div id="toInstertInfo"></div>
+    <footer>
+        <div class="foot">
+            <span class="color-picker">
+                <div class="color-pick">
+                <label for="color-pick">SELECT YOUR FAVORITE COLOR</label>
+                <input type="color" id="color-pick" value="#F0F0F0" name="color" class="select-color personalize" />
+                </div>
+                <div class="color-pick">
+                <label for="color-pick">CHANGE FONT SIZE</label>
+                <input type="range" id="color-pick" value="18" max="40" name="fontSize" data-sizing="px" class="select-color personalize" />
+                </div>
+            </span>
+        </div>
+    </footer>
 
 </body>
 
