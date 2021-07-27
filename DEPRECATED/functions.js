@@ -442,7 +442,7 @@ function previousYear() {
     "popup-text"
   ).innerHTML = `Aviso,quedan ${expMinutes} minutos para ${title}`;
   document.getElementById("popup").style.display = "block";
-  var audio = new Audio("src/sound/alarm.ogg");
+  var audio = new Audio("assets/sound/alarm.ogg");
   audio.play();
   document.getElementById("time-up").addEventListener("click", function () {
     document.getElementById("popup").style.display = "none";
