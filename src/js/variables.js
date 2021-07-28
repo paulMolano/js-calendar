@@ -2,6 +2,8 @@
 
 let storage = window.localStorage;
 
+var currentId = storage.getItem("id");
+currentId ? currentId : storage.setItem("id", 0);
 var currentStorage = storage.getItem("taskStorage");
 if (!currentStorage) {
   let taskObject = [

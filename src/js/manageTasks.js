@@ -32,29 +32,31 @@ function cancelTask() {
 }
 
 function editTask(e) {
-  //! checked
-  mm = String(mm).padStart(2, "0");
   let selectTask = e.target.dataset.id;
   let tasksObject = storage.getItem("taskStorage");
   tasksObject = JSON.parse(tasksObject);
-
+  let taskMatch = [];
   for (let i = 0; i < tasksObject.length; i++) {
+    console.log(taskMatch, tasksObject[i].id, selectTask);
     if (selectTask == tasksObject[i].id) {
-      modal.classList.replace("display-none", "modal-display-on");
-      document.getElementById("taskId").value = tasksObject[i].id;
-      document.getElementById("title").value = tasksObject[i].title;
-      document.getElementById("initial-date").value =
-        tasksObject[i].initialDate;
-      document.getElementById("final-date").value = tasksObject[i].finalDate;
-      document.getElementById("final-time").value = tasksObject[i].initialHour;
-      document.getElementById("exp-time").value = tasksObject[i].expTime;
-      document.getElementById("description").value = tasksObject[i].description;
-      document.getElementById("event-type").value = tasksObject[i].type;
-      document
-        .getElementById("save")
-        .setAttribute("data-id", tasksObject[i].id);
+      taskMatch.push(tasksObject[i]);
     }
   }
+  let fDate;
+  taskMatch.length > 1
+    ? (fDate = taskMatch[taskMatch.length - 1].finalDate)
+    : (fDate = taskMatch[0].finalDate);
+
+  modal.classList.replace("display-none", "modal-display-on");
+  document.getElementById("taskId").value = taskMatch[0].id;
+  document.getElementById("title").value = taskMatch[0].title;
+  document.getElementById("initial-date").value = taskMatch[0].initialDate;
+  document.getElementById("final-date").value = fDate;
+  document.getElementById("final-time").value = taskMatch[0].initialHour;
+  document.getElementById("exp-time").value = taskMatch[0].expTime;
+  document.getElementById("description").value = taskMatch[0].description;
+  document.getElementById("event-type").value = taskMatch[0].type;
+  document.getElementById("save").setAttribute("data-id", taskMatch[0].id);
 
   document.getElementById("save").addEventListener("click", function save(e) {
     deleteTask(e);

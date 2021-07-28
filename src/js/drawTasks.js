@@ -5,8 +5,10 @@ function drawTask() {
   let tasksObject = storage.getItem("taskStorage");
   tasksObject = JSON.parse(tasksObject);
   for (let i = 0; i < tasksObject.length; i++) {
-    let initialDate = tasksObject[i].initialDate;
-    initialDate = initialDate.split("-");
+    let fDate = tasksObject[i].finalDate;
+    let iDate = tasksObject[i].initialDate;
+    let id = tasksObject[i].id;
+    let initialDate = iDate.split("-");
     let drawn = document.getElementById("event-" + tasksObject[i].id);
     if (mm == initialDate[1] && yyyy == initialDate[0] && !drawn) {
       //*select the square
@@ -14,31 +16,31 @@ function drawTask() {
 
       //*Create div container
       let drawEvent = document.createElement("div");
-      drawEvent.setAttribute("id", "event-" + tasksObject[i].id);
-      drawEvent.setAttribute("data-id", tasksObject[i].id);
+      drawEvent.setAttribute("id", "event-" + id);
+      drawEvent.setAttribute("data-id", id);
       drawEvent.setAttribute("class", "tasks-object");
       toWrite.appendChild(drawEvent);
 
       //*Paint the event title
       let drawTitle = document.createElement("div");
       drawTitle.innerHTML = tasksObject[i].title;
-      drawTitle.setAttribute("id", "title-" + tasksObject[i].id);
-      drawTitle.setAttribute("data-id", tasksObject[i].id);
+      drawTitle.setAttribute("id", "title-" + id);
+      drawTitle.setAttribute("data-id", id);
       drawTitle.setAttribute("class", "tasks-title");
       drawEvent.appendChild(drawTitle);
 
       //*Paint the info modal hidden
       let drawEventInfo = document.createElement("div");
       drawEventInfo.innerHTML = "";
-      drawEventInfo.setAttribute("id", "info-" + tasksObject[i].id);
+      drawEventInfo.setAttribute("id", "info-" + id);
       drawEventInfo.setAttribute("class", "tasks-modal");
       toWrite.appendChild(drawEventInfo);
 
       //*Paint delete button
       var deleteButton = document.createElement("div");
       deleteButton.classList.add("delete-button");
-      deleteButton.setAttribute("id", "delete-" + tasksObject[i].id);
-      deleteButton.setAttribute("data-id", tasksObject[i].id);
+      deleteButton.setAttribute("id", "delete-" + id);
+      deleteButton.setAttribute("data-id", id);
       deleteButton.innerHTML = "-";
       drawEvent.appendChild(deleteButton);
 
@@ -49,6 +51,8 @@ function drawTask() {
       drawEvent.addEventListener("mouseout", function () {
         document.getElementById("infoDiv").remove();
       });
+
+      drawSquareTasks(id, iDate, fDate);
     }
   }
 }
@@ -128,6 +132,24 @@ function infoTask(e) {
       let copyContent = document.importNode(contentTemplate, true); //*import ghost template as html (as html)
       toInsertInfo.innerHTML = ""; //* delete ghost Template
       toInsertInfo.appendChild(copyContent); ////*insert  ghost template (now in the living world!!)
+    }
+  }
+}
+
+function drawSquareTasks(id, initialDate, finalDate) {
+  if (finalDate != "") {
+    let iDate = initialDate.split("-");
+    let fDate = finalDate.split("-");
+
+    totalTaskDays = fDate[2] - iDate[2];
+
+    for (let x = 1; x <= totalTaskDays; x++) {
+      let task = document.getElementById("event-" + id);
+      let clone = task.cloneNode(true);
+      let d = parseInt(iDate[2]) + x;
+      d < 10 ? (d = "0" + d) : d;
+      let square = document.getElementById(d);
+      square.appendChild(clone);
     }
   }
 }
