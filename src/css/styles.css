@@ -215,6 +215,7 @@ body {
 }
 
 .modal-display-on {
+  cursor: pointer;
   z-index: 3;
   position: fixed;
   background-color: rgba(0, 0, 0, 0.449);
@@ -227,6 +228,7 @@ body {
 }
 
 .modal {
+  cursor: default;
   background-color: #fff;
   padding: 1.5vh;
   border-radius: 13px;
@@ -433,6 +435,7 @@ div > label {
 }
 
 .select-color {
+  cursor: pointer;
   background-color: var(--color);
   border: none;
   border-radius: 5px;
@@ -519,6 +522,7 @@ div > label {
 .clock-btn {
   width: 50px;
   margin: 0;
+  cursor: pointer;
 }
 
 .numbers {
