@@ -1,3 +1,9 @@
+:root {
+    --color: green;
+    --spacing: 10px;
+    --fontSize: 18px;
+}
+
 body {
     z-index: 1;
     margin: 0;
@@ -313,7 +319,7 @@ label {
 
 .looking {
     transform: scale(0.95);
-    transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 1s;
+    transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 2s;
     border-color: var(--color);
     box-shadow: 0 0 1rem var(--color);
 }
@@ -357,6 +363,7 @@ label {
 .close:hover {
     color: red;
     font-weight: bolder;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 3s;
 }
 
 .save {
@@ -368,6 +375,7 @@ label {
     color: green;
     background-color: rgba(0, 0, 0, 0.019);
     border: none;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 3s;
 }
 
 .cancel {
@@ -379,6 +387,7 @@ label {
     color: red;
     background-color: rgba(0, 0, 0, 0.019);
     border: none;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 3s;
 }
 
 img {
@@ -402,12 +411,6 @@ button.accept {
     box-shadow: 0px 6px 18px -5px var(--color);
 }
 
-:root {
-    --color: green;
-    --spacing: 10px;
-    --fontSize: 18px;
-}
-
 .foot {
     display: flex;
     align-items: center;
@@ -417,7 +420,7 @@ button.accept {
 }
 
 
-/*Color selector*/
+/*COLOR AND FONTSIZE-SELECTORS*/
 
 div>label {
     font-size: 0.8rem;
@@ -496,28 +499,63 @@ div>label {
 
 .twelve {
     position: absolute;
-    right: 50%;
+    right: 47%;
 }
 
 .six {
     position: absolute;
-    right: 50%;
+    right: 47%;
     bottom: 1%;
 }
 
 .three {
     position: absolute;
     right: 2%;
-    bottom: 50%;
+    bottom: 47%;
 }
 
 .nine {
     position: absolute;
-    right: 95%;
-    bottom: 50%;
+    right: 90%;
+    bottom: 47%;
 }
 
 .clock-btn {
     width: 50px;
     margin: 0;
+}
+
+.numbers {
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+
+/*DARK-LIGHT-MODE*/
+
+.label {
+    position: relative;
+    z-index: 0;
+    height: 20px;
+    width: 60px;
+    border-radius: 20%;
+    background-color: rgba(255, 255, 255, 0.979);
+}
+
+.ball {
+    position: absolute;
+    z-index: 1;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: rgba(228, 18, 18, 0.979);
+}
+
+.light-mode {
+    background-color: white;
+    color: black;
+}
+
+.checkbox:checked+.label.ball {
+    transform: translateY(40px);
 }
