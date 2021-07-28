@@ -1,7 +1,6 @@
 function saveTask() {
-  console.log("save");
+  //? Collects data imputs
   let task = {
-    //objeto task
     id: 00,
     title: document.getElementById("title").value,
     initialDate: document.getElementById("initial-date").value,
@@ -17,6 +16,7 @@ function saveTask() {
 }
 
 function storageTasks(task) {
+  //? Saves data
   let id = storage.getItem("id"); //traemos el JSON "id"
   let taskId = parseInt(id) + 1; // taskId = valor numerico de (JSON "id")+1
   storage.setItem("id", taskId); // sobreescribimos el JSON "id" con el valor de taskI
@@ -26,8 +26,10 @@ function storageTasks(task) {
   let tasksObject = JSON.parse(taskStorage);
 
   if (fDate != "" && iDate[1] != fDate[1]) {
+    //* Difference if have final date
     for (let n = 0; n <= fDate[1] - iDate[1]; n++) {
       if (n == 0) {
+        //* First month
         let task1 = {
           //objeto task1
           id: taskId,
@@ -41,6 +43,7 @@ function storageTasks(task) {
         };
         tasksObject.push(task1);
       } else if (n == fDate[1] - iDate[1]) {
+        //* Last month
         let task2 = {
           //objeto task2
           id: taskId,
@@ -57,6 +60,7 @@ function storageTasks(task) {
         let monthNumber = parseInt(iDate[1]) + n;
         monthNumber > 10 ? (monthNumber = "0" + monthNumber) : monthNumber;
         let task3 = {
+          //* Month between
           //objeto task1
           id: taskId,
           title: task.title,
@@ -80,7 +84,7 @@ function storageTasks(task) {
 }
 
 function deleteTask(e) {
-  mm = String(mm).padStart(2, "0");
+  //? Delete data
   let id;
   e.target.dataset.id ? (id = e.target.dataset.id) : (id = selectTask);
   let tasksObject = storage.getItem("taskStorage");
@@ -97,6 +101,7 @@ function deleteTask(e) {
 }
 
 function clearCalendar(id, finalDate) {
+  //? Delete tasks drawn
   if (finalDate != "") {
     let tasks = document.querySelectorAll("#event-" + id);
     for (const task of tasks) {

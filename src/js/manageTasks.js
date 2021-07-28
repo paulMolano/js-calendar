@@ -1,4 +1,5 @@
 function validationForm() {
+  //? validates form imput data
   let inputs = document.querySelectorAll(".required");
   let count = 0;
   for (const input of inputs) {
@@ -7,10 +8,12 @@ function validationForm() {
   count == 4 ? saveTask() : alert("You must fill all the fields ");
 }
 function newTask() {
+  //? Opens modal form
   modal.classList.replace("display-none", "modal-display-on");
 }
 
 function newTaskpreDay(e) {
+  //? Opens modal with preset initial date
   if (e.target.classList == "day-style looking") {
     newTask();
     let daytotask = e.target.id;
@@ -27,11 +30,13 @@ function newTaskpreDay(e) {
 }
 
 function cancelTask() {
+  //? Close modal form
   document.getElementById("myForm").reset();
   modal.classList.replace("modal-display-on", "display-none");
 }
 
 function editTask(e) {
+  //? Opens modal with preset initial data
   let selectTask = e.target.dataset.id;
   let tasksObject = storage.getItem("taskStorage");
   tasksObject = JSON.parse(tasksObject);

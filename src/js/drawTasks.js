@@ -37,11 +37,11 @@ function drawTask() {
       toWrite.appendChild(drawEventInfo);
 
       //*Paint delete button
-      var deleteButton = document.createElement("div");
+      var deleteButton = document.createElement("img");
       deleteButton.classList.add("delete-button");
-      deleteButton.setAttribute("id", "delete-" + id);
-      deleteButton.setAttribute("data-id", id);
-      deleteButton.innerHTML = "-";
+      deleteButton.setAttribute("id", "delete-" + tasksObject[i].id);
+      deleteButton.setAttribute("src", "/src/img/bin.svg");
+      deleteButton.setAttribute("data-id", tasksObject[i].id);
       drawEvent.appendChild(deleteButton);
 
       //*Add events
@@ -137,19 +137,20 @@ function drawTask() {
 }
 
 function drawSquareTasks(id, initialDate, finalDate) {
+  //? Clone task title from the first square
   if (finalDate != "") {
     let iDate = initialDate.split("-");
     let fDate = finalDate.split("-");
 
-    totalTaskDays = fDate[2] - iDate[2];
+    totalTaskDays = fDate[2] - iDate[2]; //* calc how many clones we have to do
 
     for (let x = 1; x <= totalTaskDays; x++) {
       let task = document.getElementById("event-" + id);
-      let clone = task.cloneNode(true);
+      let clone = task.cloneNode(true); //* clone the selected node
       let d = parseInt(iDate[2]) + x;
       d < 10 ? (d = "0" + d) : d;
       let square = document.getElementById(d);
-      square.appendChild(clone);
+      square.appendChild(clone); //* insert clone
     }
   }
 }
