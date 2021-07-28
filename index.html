@@ -129,6 +129,19 @@
             </form>
         </div>
     </div>
+    <div id="clock-container" class="display-none">
+        <div id="sphere">
+            <div class="clock">
+                <div class="numbers twelve">XII</div>
+                <div class="numbers three">III</div>
+                <div class="numbers six">VI</div>
+                <div class="numbers nine">IX</div>
+                <div class="hand hour"></div>
+                <div class="hand mins"></div>
+                <div class="hand seconds"></div>
+            </div>
+        </div>
+    </div>
     <div id="popup" class="popup">
         <div class="container">
             <div class="popupContent" id="popupPopup">
@@ -139,9 +152,16 @@
         </div>
     </div>
     </div>
+
     <div id="toInstertInfo"></div>
+
     <footer>
         <div class="foot">
+            <div class="foot-content">
+                <img id="clock-btn" class="clock-btn" src="src\img\clock.svg" alt="littleClock">
+                <label for="clock-btn">You can check the time here!</label>
+            </div>
+
             <span class="color-picker">
                 <div class="color-pick">
                 <label for="color-pick">SELECT YOUR FAVORITE COLOR</label>
@@ -152,6 +172,8 @@
                 <input type="range" id="color-pick" value="18" max="40" name="fontSize" data-sizing="px" class="select-color personalize" />
                 </div>
             </span>
+
+        </div>
         </div>
     </footer>
 

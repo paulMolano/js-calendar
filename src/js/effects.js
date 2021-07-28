@@ -46,3 +46,39 @@ function theChange() {
 }
 
 inputss.forEach((input) => input.addEventListener("change", theChange));
+
+/*CLOCK*/
+
+var secondsPalo = document.querySelector(".seconds");
+var minutesPalo = document.querySelector(".mins");
+var hoursPalo = document.querySelector(".hour");
+
+function setTime() {
+    var now = new Date();
+    var chipiron = now.getSeconds();
+    var secondChipiron = (chipiron / 60) * 360 + 90;
+    secondsPalo.style.transform = `rotate(${secondChipiron}deg)`;
+
+    var calamar = now.getMinutes();
+    var minsChipiron = (calamar / 60) * 360 + 90;
+    minutesPalo.style.transform = `rotate(${minsChipiron}deg)`;
+
+    var pulpo = now.getHours();
+    var hoursChipiron = (pulpo / 12) * 360 + 90;
+    hoursPalo.style.transform = `rotate(${hoursChipiron}deg)`;
+}
+
+setInterval(setTime, 1000);
+
+const clockModal = document.querySelector("#clock-container");
+window.addEventListener("click", removeClock);
+
+function checkClock() {
+    clockModal.classList.replace("display-none", "modal-display-on");
+}
+
+function removeClock(e) {
+    if (e.target === clockModal) {
+        clockModal.classList.replace("modal-display-on", "display-none");
+    }
+}

@@ -4,33 +4,31 @@ let storage = window.localStorage;
 
 var currentStorage = storage.getItem("taskStorage");
 if (!currentStorage) {
-  let taskObject = [
-    {
-      description: "0",
-      expTime: "0",
-      finalDate: "",
-      initialHour: "00:00",
-      id: 0,
-      initialDate: "0000-00-00",
-      title: "0",
-    },
-  ];
-  storage.setItem("taskStorage", JSON.stringify(taskObject));
+    let taskObject = [{
+        description: "0",
+        expTime: "0",
+        finalDate: "",
+        initialHour: "00:00",
+        id: 0,
+        initialDate: "0000-00-00",
+        title: "0",
+    }, ];
+    storage.setItem("taskStorage", JSON.stringify(taskObject));
 }
 
 const monthNames = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
 ];
 var dd = getCurrentTime().day;
 var mm = getCurrentTime().month;
@@ -48,25 +46,25 @@ var modal2 = document.getElementById("modal-container2");
 
 //?--------------------------------------------------- FUNCTION CURRENT-TIME---------------------------------------------------\\
 function getCurrentTime() {
-  const day = new Date();
-  var dd = String(day.getDate());
-  var mm = String(day.getMonth() + 1).padStart(2, "0");
-  var currentHours = day.getHours();
-  var currentMinutes = day.getMinutes();
-  var yyyy = day.getFullYear();
-  var firstDay = new Date(mm + " 01, " + yyyy + " 00:00:00").getDay();
-  firstDay == 0 ? (firstDay = 7) : firstDay;
-  var monthLength = new Date(yyyy, mm, 0).getDate();
-  let date = {
-    day: dd,
-    month: mm,
-    year: yyyy,
-    hours: currentHours,
-    minutes: currentMinutes,
-    fDay: firstDay,
-    mLength: monthLength,
-  };
-  return date;
+    const day = new Date();
+    var dd = String(day.getDate());
+    var mm = String(day.getMonth() + 1).padStart(2, "0");
+    var currentHours = day.getHours();
+    var currentMinutes = day.getMinutes();
+    var yyyy = day.getFullYear();
+    var firstDay = new Date(mm + " 01, " + yyyy + " 00:00:00").getDay();
+    firstDay == 0 ? (firstDay = 7) : firstDay;
+    var monthLength = new Date(yyyy, mm, 0).getDate();
+    let date = {
+        day: dd,
+        month: mm,
+        year: yyyy,
+        hours: currentHours,
+        minutes: currentMinutes,
+        fDay: firstDay,
+        mLength: monthLength,
+    };
+    return date;
 }
 
 /*HEADER DATE*/

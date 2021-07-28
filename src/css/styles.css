@@ -409,6 +409,9 @@ button.accept {
 }
 
 .foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     background-color: var(--color);
     height: 10vh;
 }
@@ -441,4 +444,80 @@ div>label {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+
+/*CLOCK*/
+
+#sphere {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color);
+    filter: opacity(0.7);
+    background-size: contain;
+    /*border: solid 1px rgb(244, 251, 145);*/
+    border-radius: 50%;
+    height: 500px;
+    width: 500px;
+}
+
+.clock {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.hand {
+    position: absolute;
+    width: 50%;
+    height: 5px;
+    top: 50%;
+    transform-origin: 100%;
+    transition: all 0.05s;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+}
+
+.hour {
+    background-color: rgba(0, 0, 0, 0.37);
+    transform: rotate(90deg);
+}
+
+.mins {
+    background-color: rgba(0, 0, 0, 0.37);
+    transform: rotate(90deg);
+}
+
+.seconds {
+    background-color: rgba(0, 0, 0, 0.37);
+    transform: rotate(90deg);
+}
+
+.twelve {
+    position: absolute;
+    right: 50%;
+}
+
+.six {
+    position: absolute;
+    right: 50%;
+    bottom: 1%;
+}
+
+.three {
+    position: absolute;
+    right: 2%;
+    bottom: 50%;
+}
+
+.nine {
+    position: absolute;
+    right: 95%;
+    bottom: 50%;
+}
+
+.clock-btn {
+    width: 50px;
+    margin: 0;
 }
